@@ -8,7 +8,6 @@ let code = window.location.href
 code = code.replace(window.location.origin, "");
 code = code.replace("/?code=", "");
 console.log(code);
-console.log("Proyecto");
 
 fetch('https://www.tiendanube.com/apps/authorize/token', {
   method: "POST",
