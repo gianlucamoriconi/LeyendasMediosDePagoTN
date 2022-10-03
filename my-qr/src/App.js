@@ -1,8 +1,7 @@
-import logo from './logo.svg';
 import './scss/style.scss';
 import './App.css';
 import Home from './components/Home';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 function App() {
