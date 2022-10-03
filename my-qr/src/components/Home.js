@@ -22,7 +22,7 @@ fetch('https://www.tiendanube.com/apps/authorize/token', {
 .then(response => response.json()) 
 .then(json => console.log(json));
 
-console.log("runn");
+console.log("run");
 
 const Home = () => {
     return (
