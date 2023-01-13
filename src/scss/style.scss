@@ -4,14 +4,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-$primaryCustom: #72ff30a1;
+
+$primaryCustom: #30fff1;
 $primary: $primaryCustom;
+$primaryPure: #30fff1;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+:root{
+  --primary: #30fff1a1;
+}
+
+.main-title{
+  font-weight: 200;
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color; /* The Fallback */
+  background: rgba($color, $opacity);
+}
+
+@mixin color-darker($color, $brightness: 65%) {
+  color: $color;
+  filter: brightness($brightness);
+}
+
 *{
 font-family: 'Manrope', sans-serif;
+}
+
+html{
+  background-color: #F8F9FA;
 }
 
 .App {
@@ -128,7 +154,7 @@ font-family: 'Manrope', sans-serif;
   object-fit: contain;
 }
 
-.h-80{
+.hv-80{
   height: 80vh;
 }
 
@@ -142,6 +168,10 @@ font-family: 'Manrope', sans-serif;
 
 .max-width-200{
   max-width: 200px;
+}
+
+.max-width-900{
+  max-width: 900px;
 }
 
 .btn-primary{
@@ -184,14 +214,14 @@ font-family: 'Manrope', sans-serif;
 }
 
 .nav-link:hover{
-    background-color: #72ff30a1!important;
+    background-color: var(--primary)!important;
     border-radius: 18px;
     transition: 0.2s;
 }
 
 
 .nav-link.active{
-    background-color: #72ff30a1!important;
+    background-color: var(--primary)!important;
     font-weight: 900;
     border-radius: 18px;
     transition: 0.2s;
@@ -223,7 +253,7 @@ font-family: 'Manrope', sans-serif;
   font-size: 14px;
     border: 2px solid transparent;
     text-decoration: none;
-    background-color: rgba(114, 255, 48, 0.631372549) !important;
+    background-color:  var(--primary)!important;
     border-radius: 30px;
     transition: 0.2s;
 }
@@ -231,7 +261,7 @@ font-family: 'Manrope', sans-serif;
 .variant-option:hover {
     border: 2px solid #ED6C28;
     text-decoration: none;
-    background-color: rgba(114, 255, 48, 0.631372549) !important;
+    background-color: var(--primary)!important;
     border-radius: 30px;
     transition: 0.4s;
 }
@@ -252,7 +282,8 @@ font-family: 'Manrope', sans-serif;
 }
 
 .brand-name{
-  color: rgba(46, 139, 2, 0.754);
+  color: var(--primary);
+  @include color-darker(var(--primary), 55%);
   font-weight: 600;
 }
 
@@ -358,25 +389,152 @@ select{
   letter-spacing: 0.5px;
 }
 
-.variants select{
-  border: 1px solid lightgrey;
-  border-radius: 10px;
+pre{
+  font-size: 12px;
 }
 
-#orderResume{
-  height: fit-content;
-  position: sticky;
-  top: 35px;
+.background-grey{
+  background-color:rgb(241 241 241);
+  color:rgb(66, 66, 66);
 }
 
-#checkoutForm{
-  background-color: #8080800f;
+.max-width-900{
+  max-width: 900px;
 }
 
-.breadcrumb-checkout{
+h3{
+  font-size: calc(0.8rem + 0.6vw);
+}
+
+.add-line-button{
+  font-size: 14px;
+}
+
+.title-home {
+  display: inline-flex;
+}
+
+.title-home:before {
+  content: "-";
+  background: #d1d1d1;
+  background-image: linear-gradient(299.33deg,rgb(0 255 251 / 50%) 5%,rgb(78 75 102 / 0%) 75%);
+  width: 80px;
+  margin-left: -69px;
+  margin-right: 12px;
+  border-radius: 5px;
+}
+
+footer {
+    position: fixed;
+    top: 10px;
+    right: 14px;
+    margin: auto;
+    border-radius: 20px;
+    background: #21252908;
+    backdrop-filter: blur(5px);
+    max-width: fit-content;
+}
+
+#guide{
+  & p, ul, li{
+    font-size: 14px;
+  }
+}
+
+.trash-button svg{
+  transition: 0.2s ease-in-out;
+}
+.trash-button:hover svg{
+  fill: red!important;
+  transition: 0.2s ease-in-out;
+}
+
+.copy-to-clipboard {
+  top: 0%;
+  right: 0%;
+  color: grey;
+  font-size: 15px;
+  transition: .5s;
+}
+
+.copy-to-clipboard{
+  font-size: 20px;
+}
+
+.copy-to-clipboard:active {
+  background: var(--primary)!important;
+  transition: .5s;
+}
+
+div#guide {
+  border-right: 1px solid var(--primary);
+  @include background-opacity($primaryPure, 0.1);
+  background-image: linear-gradient(114.67deg,rgb(0 255 251 / 50%) 5%,rgb(78 75 102 / 0%) 75%);
+}
+
+.description{
+  font-size: 16px;
+}
+
+.content {
   font-size: 13px;
+  padding: 10px;
 }
 
-.payment-option{
-  background-color: #fff;
+.back-button {
+  position: absolute;
+  top: 9%;
+  right: -7%;
+  border-radius: 50%;
+  line-height: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  font-size: 20px;
+
+  & > svg {
+    margin-top: 3px;
+    margin-left: -2px;
+  }
+}
+
+.add-circle {
+  font-size: 16px;
+  margin-top: -2px;
+  margin-right: 5px;
+}
+
+.label-fw-light .MuiFormControlLabel-label{
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0px;
+}
+
+
+
+.blur{
+  backdrop-filter: blur(20px);
+}
+
+#bottom-menu{
+  z-index: 9999;
+  max-width: 900px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#presentation .main-title {
+  text-align: center;
+  vertical-align: middle;
+  margin: auto;
+  font-family: 'Exo';
+}
+
+#editZone{
+  margin-bottom: 70px!important;
+}
+
+strong.main-title {
+  font-weight: 800;
 }
