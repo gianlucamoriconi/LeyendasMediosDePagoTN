@@ -4,20 +4,19 @@ import BottomMenu from './BottomMenu';
 import Menu from './Menu';
 import Presentation from './Presentation';
 import EditZone from './EditZone/EditZone';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { OptionZoneContext } from '../context/optionZoneContext';
+
 
 
 const Home = () => {
-    const [zoneTitle, setTitle] = useState("Para la tienda");
-    const [zone, setZone] = useState("Para la tienda");
+    const { zone, handleEditZoneSelected } = useContext(OptionZoneContext);
 
     return (
         <>
-            <Presentation/>
+            <Presentation zone={zone} handleEditZoneSelected={handleEditZoneSelected}/>
             <div className='d-flex bg-light'>
-                {/* <Menu backButton={false} /> */}
-                <EditZone zone={zone} zoneTitle={zoneTitle}/>
-                {/* <BottomMenu/> */}
+                <EditZone zone={zone}/>
                 <Footer color="light"/>
             </div>
         </>

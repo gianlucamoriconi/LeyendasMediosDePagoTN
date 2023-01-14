@@ -111,7 +111,7 @@ const LinesForm = (props) => {
     return (
 
             <div>
-                <Box className='mb-4'
+                <Box className='mb-4 w-100'
                     component="form"
                     sx={{
                         '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -122,7 +122,7 @@ const LinesForm = (props) => {
                     {totalSelection[zone].map((line, index) =>{
 
                         if (line.typefield === "installments"){
-                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config">
+                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap">
                                 <TextField
                                     value={line.numberInput > 0 ? line.numberInput : '' }
                                     required
@@ -147,7 +147,7 @@ const LinesForm = (props) => {
                         }
 
                         else if (line.typefield === "discount"){
-                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config fade-in-up">
+                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap fade-in-up">
                                 <TextField
                                     value={line.numberInput > 0 ? line.numberInput : '' }
                                     required
@@ -173,8 +173,15 @@ const LinesForm = (props) => {
 
                     })}
                 </Box>
-                <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button me-3'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
-                <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
+                <div className='d-flex w-100'>
+                    <div className='col-6 pe-3'>
+                        <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button w-100'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
+                    </div>
+                    <div className='col-6'>
+                        <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button w-100'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
+                    </div>
+                </div>
+
             </div>
     )
 }

@@ -4,8 +4,8 @@ const Box = ({component}) => {
 
     return (
 
-        <div className='w-100 mb-3 p-3 shadow d-flex flex-wrap border rounded'>
-            <div className="form-col">
+        <div className='form-editor w-100 mb-5 p-3 d-flex flex-wrap border rounded'>
+            <div className="form-col w-100">
                 {component}
             </div>
         </div>
