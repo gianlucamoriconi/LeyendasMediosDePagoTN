@@ -1,329 +1,135 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 
-export const OptionsContextObject = createContext();
+export const OptionsContextCheckout = createContext();
 
-const initItemProducts = JSON.parse(localStorage.getItem('itemProducts')) || [];
-const initDetailMain = JSON.parse(localStorage.getItem('detailMain')) || [];
-const initCart = JSON.parse(localStorage.getItem('cart')) || [];
-const initModalMercadopago = JSON.parse(localStorage.getItem('modalMercadopago')) || [];
-const initModalMobbex = JSON.parse(localStorage.getItem('modalMobbex')) || [];
-const initModalPagonube = JSON.parse(localStorage.getItem('modalPagonube')) || [];
-const initModalUala = JSON.parse(localStorage.getItem('modalUala')) || [];
-const initModalModo = JSON.parse(localStorage.getItem('modalModo')) || [];
-const initModalDlocal = JSON.parse(localStorage.getItem('modalDlocal')) || [];
-const initModalGocuotas = JSON.parse(localStorage.getItem('modalGocuotas')) || [];
+const initMercadopagoTransparente = JSON.parse(localStorage.getItem('mercadopagoTransparenteCHO')) || {id: "mercadopago_transparent_card",  display: false, text: null};
+const initMercadopagoRedirect = JSON.parse(localStorage.getItem('mercadopagoRedirectCHO')) || {id: "mercadopago_redirect", display: false, text: null};
+const initMercadopagoOffline = JSON.parse(localStorage.getItem('mercadopagoOfflineCHO')) || {id: "mercadopago_transparent_offline", display: false, text: null};
+const initUalaTransparente = JSON.parse(localStorage.getItem('ualaTransparenteCHO')) || {id: "UALA_PROD", display: false, text: null};
+const initCustomWire = JSON.parse(localStorage.getItem('customWireCHO')) || {id: "custom_payment_wire_transfer_production", display: false, text: null};
+const initCustomCash = JSON.parse(localStorage.getItem('customCashCHO')) || {id: "custom_payment_cash_production", display: false, text: null};
+const initCustomOther = JSON.parse(localStorage.getItem('customOtherCHO')) || {id: "custom_payment_other_production", display: false, text: null};
 
 
-export const OptionsProvider = ({children}) => {
-    const [itemProducts, setItemProducts] = useState(initItemProducts);
-    const [detailMain, setDetailMain] = useState(initDetailMain);
-    const [cart, setCart] = useState(initCart);
-    const [modalMercadopago, setModalMercadopago] = useState(initModalMercadopago);
-    const [modalMobbex, setModalMobbex] = useState(initModalMobbex);
-    const [modalPagonube, setModalPagonube] = useState(initModalPagonube);
-    const [modalModo, setModalModo] = useState(initModalModo);
-    const [modalDlocal, setModalDlocal] = useState(initModalDlocal);
-    const [modalGocuotas, setModalGocuotas] = useState(initModalGocuotas);
-    const [modalUala, setModalUala] = useState(initModalUala);
+export const OptionsCheckout = ({children}) => {
 
+    const [mercadopago_transparent_card, set_mercadopago_transparent_card] = useState(initMercadopagoTransparente);
+    const [mercadopago_redirect, set_mercadopago_redirect] = useState(initMercadopagoRedirect);
+    const [mercadopago_transparent_offline, set_mercadopago_transparent_offline] = useState(initMercadopagoOffline);
+    const [UALA_PROD, set_UALA_PROD] = useState(initUalaTransparente);
+    const [custom_payment_wire_transfer_production, set_custom_payment_wire_transfer_production] = useState(initCustomWire);
+    const [custom_payment_cash_production, set_custom_payment_cash_production] = useState(initCustomCash);
+    const [custom_payment_other_production, set_custom_payment_other_production] = useState(initCustomOther);
 
-    const totalSelectionModal = {
-        modalMercadopago: modalMercadopago,
-        modalMobbex: modalMobbex,
-        modalPagonube: modalPagonube,
-        modalUala: modalUala,
-        modalModo: modalModo,
-        modalDlocal: modalDlocal,
-        modalGocuotas: modalGocuotas
-    };
-
-    const totalSelection = {
-        itemProducts: itemProducts,
-        detailMain: detailMain,
-        cart: cart,
-        totalSelectionModal
-    };
-
-
-    /* Handlers que construyen los objetos de:
-        itemProducts,
-        detailMain,
-        cart
-
-        Los de detailModal son diferentes, están más abajo.
-     */
-    const handleAddLineInObject = (place, lineObject) =>{
-        if (place === "itemProducts"){
-            if (isInObject(lineObject) === true){
-                itemProducts.map((line) => {
-                    if (line.id === lineObject.id){
-                      line.numberInput = lineObject.numberInput;
-                      line.paymentMethodInput = lineObject.paymentMethodInput;
-                      setItemProducts([...itemProducts]);
-                    }
-                  });
-            } else {
-                setItemProducts([...itemProducts, lineObject])
-            }
-        }
-
-        else if (place === "detailMain"){
-            if (isInObject(lineObject) === true){
-                detailMain.map((line) => {
-                    if (line.id === lineObject.id){
-                      line.numberInput = lineObject.numberInput;
-                      line.paymentMethodInput = lineObject.paymentMethodInput;
-                      setDetailMain([...detailMain]);
-                    }
-                  });
-            } else {
-                setDetailMain([...detailMain, lineObject])
-            }
-        }
-
-        else if (place === "cart"){
-            if (isInObject(lineObject) === true){
-                cart.map((line) => {
-                    if (line.id === lineObject.id){
-                      line.numberInput = lineObject.numberInput;
-                      line.paymentMethodInput = lineObject.paymentMethodInput;
-                      setCart([...cart]);
-                    }
-                  });
-
-            } else {
-                setCart([...cart, lineObject])
-            }
-        }
-
-    }
-
-    const handleRemoveLineInObject = (place, lineObjectId) =>{
-        if (place === "itemProducts"){
-            setItemProducts([...itemProducts.filter((item) => item.id !== lineObjectId)])
-        }
-
-        else if (place === "detailMain"){
-            setDetailMain([...detailMain.filter((item) => item.id !== lineObjectId)])
-        }
-
-        else if (place === "cart"){
-            setCart([...cart.filter((item) => item.id !== lineObjectId)])
-        }
-    }
-
-    const isInObject = (line) => {
-        if (line.place === "itemProducts"){
-            return itemProducts.some((item) => item.id === line.id)
-        }
-
-        else if (line.place === "detailMain"){
-            return detailMain.some((item) => item.id === line.id)
-        }
-
-        else if (line.place === "cart"){
-            return cart.some((item) => item.id === line.id)
-        }
-        return cart.some((item) => item.id === line.id)
-    }
-
-
-    const isInObjectModal = (box) => {
-        if (box.savedId === "modalMercadopago"){
-            return modalMercadopago.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalMobbex"){
-            return modalMobbex.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalModo"){
-            return modalModo.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalPagonube"){
-            return modalPagonube.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalDlocal"){
-            return modalDlocal.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalUala"){
-            return modalUala.some((item) => item.id === box.id)
-        }
-
-        else if (box.savedId === "modalGocuotas"){
-            return modalGocuotas.some((item) => item.id === box.id)
-        }
-    }
-
-
-    /* Handlers que construyen el objeto de: detailModal */
-
-    const handleAddBoxInObject = (payment, boxObject) =>{
-
-        if (payment === "modalMercadopago"){
-            if (isInObjectModal(boxObject) === true){
-                modalMercadopago.map((box) => {
-                    if (box.id === boxObject.id){
-                      box.numberInstallment = boxObject.numberInstallment;
-                      setModalMercadopago([...modalMercadopago]);
-                    }
-                  });
-            } else {
-                setModalMercadopago([...modalMercadopago, boxObject])
-            }
-        }
-
-        else if (payment === "modalMobbex"){
-            if (isInObjectModal(boxObject) === true){
-                modalMobbex.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalMobbex([...modalMobbex]);
-                    }
-                  });
-            } else {
-                setModalMobbex([...modalMobbex, boxObject])
-            }
-        }
-
-        else if (payment === "modalPagonube"){
-            if (isInObjectModal(boxObject) === true){
-                modalPagonube.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalPagonube([...modalPagonube]);
-                    }
-                  });
-
-            } else {
-                setModalPagonube([...modalPagonube, boxObject])
-            }
-        }
-
-        else if (payment === "modalUala"){
-            if (isInObjectModal(boxObject) === true){
-                modalUala.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalUala([...modalUala]);
-                    }
-                  });
-
-            } else {
-                setModalUala([...modalUala, boxObject])
-            }
-        }
-
-
-        else if (payment === "modalModo"){
-            if (isInObjectModal(boxObject) === true){
-                modalModo.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalModo([...modalModo]);
-                    }
-                  });
-
-            } else {
-                setModalModo([...modalModo, boxObject])
-            }
-        }
-
-
-        else if (payment === "modalDlocal"){
-            if (isInObjectModal(boxObject) === true){
-                modalDlocal.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalDlocal([...modalDlocal]);
-                    }
-                  });
-
-            } else {
-                setModalDlocal([...modalDlocal, boxObject])
-            }
-        }
-
-        else if (payment === "modalGocuotas"){
-            if (isInObjectModal(boxObject) === true){
-                modalGocuotas.map((box) => {
-                    if (box.id === boxObject.id){
-                        box.numberInstallment = boxObject.numberInstallment;
-                        setModalGocuotas([...modalGocuotas]);
-                    }
-                  });
-
-            } else {
-                setModalGocuotas([...modalGocuotas, boxObject])
-            }
-        }
-    }
-
-
-    const handleRemoveBoxInObject = (payment, boxObjectId) =>{
-        if (payment === "modalMercadopago"){
-            setModalMercadopago([...modalMercadopago.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalMobbex"){
-            setModalMobbex([...modalMobbex.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalModo"){
-            setModalModo([...modalModo.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalPagonube"){
-            setModalPagonube([...modalPagonube.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalDlocal"){
-            setModalDlocal([...modalDlocal.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalUala"){
-            setModalUala([...modalUala.filter((item) => item.id !== boxObjectId)])
-        }
-
-        else if (payment === "modalGocuotas"){
-            setModalGocuotas([...modalGocuotas.filter((item) => item.id !== boxObjectId)])
-        }
-    }
-
+    const totalSelectionCHO = [
+        mercadopago_transparent_card,
+        mercadopago_redirect,
+        mercadopago_transparent_offline,
+        UALA_PROD,
+        custom_payment_wire_transfer_production,
+        custom_payment_cash_production,
+        custom_payment_other_production
+    ];
+    
+    const [paymentMethodsData, setPaymentMethodsData] = useState([
+        {
+            id: "mercadopago_transparent_card",
+            paymentName: "Mercado Pago Transparente",
+            img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
+            dataContext: mercadopago_transparent_card,
+        },
+        {
+            id: "mercadopago_redirect",
+            paymentName: "Mercado Pago Redirect",
+            img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
+            dataContext: mercadopago_redirect
+        },
+        {
+            id: "mercadopago_transparent_offline",
+            paymentName: "Mercado Pago Offline (Rapipago/Pagofácil)",
+            img: null,
+            dataContext: mercadopago_transparent_offline
+        },
+        {
+            id: "UALA_PROD",
+            paymentName: "Ualá Transparente",
+            img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logotipo_de_Ual%C3%A1.svg/2560px-Logotipo_de_Ual%C3%A1.svg.png",
+            dataContext: UALA_PROD
+        },
+        {
+            id: "custom_payment_wire_transfer_production",
+            paymentName: "Transferencia bancaria (personalizado del admin)",
+            img: null,
+            dataContext: custom_payment_wire_transfer_production
+        },
+        {
+            id: "custom_payment_cash_production",
+            paymentName: "Efectivo (personalizado del admin)",
+            img: null,
+            dataContext: custom_payment_cash_production
+        },
+        {
+            id: "custom_payment_other_production",
+            paymentName: "A convenir (personalizado del admin)",
+            img: null,
+            dataContext: custom_payment_other_production
+        },
+    ]);
     
 
+    const contentShowOrHide = (e) =>{
+        const switcherId = e.target.id; //this is payment ID, which matches with payment const's state
+        // console.log(switcherId);
+        
+        if (switcherId === "mercadopago_transparent_card") {
+
+                if (mercadopago_transparent_card.display === false) {
+
+                    mercadopago_transparent_card.display = true;
+        
+                    set_mercadopago_transparent_card(mercadopago_transparent_card);
+                    console.log(mercadopago_transparent_card);
+                }
+
+                else if (mercadopago_transparent_card.display === true){
+                    mercadopago_transparent_card.display = false;
+        
+                    set_mercadopago_transparent_card(mercadopago_transparent_card);
+                    console.log(mercadopago_transparent_card);
+                }
+
+                else{
+                    console.log(mercadopago_transparent_card);
+                    throw Error ("Seems there's no display property :O");
+                }
+                
+        }
+
+    };
+
+
     return (
-        <OptionsContextObject.Provider value={{
-            itemProducts,
-            detailMain,
-            cart,
-            modalMercadopago,
-            modalMobbex,
-            modalPagonube,
-            modalUala,
-            modalModo,
-            modalDlocal,
-            modalGocuotas,
-            setModalMercadopago,
-            setModalMobbex,
-            setModalPagonube,
-            setModalModo,
-            setModalDlocal,
-            setModalGocuotas,
-            setModalUala,
-            handleAddLineInObject,
-            handleRemoveLineInObject,
-            isInObject,
-            handleAddBoxInObject,
-            handleRemoveBoxInObject,
-            totalSelection,
-            totalSelectionModal
+        <OptionsContextCheckout.Provider value={{
+            mercadopago_transparent_card,
+            mercadopago_redirect,
+            mercadopago_transparent_offline,
+            UALA_PROD,
+            custom_payment_wire_transfer_production,
+            custom_payment_cash_production,
+            custom_payment_other_production,
+            set_mercadopago_transparent_card,
+            set_mercadopago_redirect,
+            set_mercadopago_transparent_offline,
+            set_UALA_PROD,
+            set_custom_payment_wire_transfer_production,
+            set_custom_payment_cash_production,
+            set_custom_payment_other_production,
+            contentShowOrHide,
+            totalSelectionCHO,
+            paymentMethodsData
         }}>
           {children}
-        </OptionsContextObject.Provider>
+        </OptionsContextCheckout.Provider>
     )
 }

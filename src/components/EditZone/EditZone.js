@@ -30,7 +30,7 @@ const EditZone = ({zone}) => {
                 <Link to="/result" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
                 </>
             :
-                <Box component={<EditCheckout/>}/>
+                <EditCheckout/>
             }
 
         </section>

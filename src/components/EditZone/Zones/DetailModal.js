@@ -1,6 +1,6 @@
 
 import Title from './Title';
-import Switcher from '../../Switcher';
+import Switcher from '../../resources/Switcher';
 import Description from './Description';
 import FormGroup from '@mui/material/FormGroup';
 import { useContext } from 'react';

@@ -5,21 +5,25 @@ import Result from './components/Result';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { OptionsProvider } from './context/optionsContextObject';
 import { OptionZoneProvider } from './context/optionZoneContext';
+import { OptionsCheckout } from './context/optionsContextCheckout';
+
 
 
 
 function App() {
   return (
-    <OptionZoneProvider>
-      <OptionsProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={ <Home /> }/>
-            <Route path="/result" element={ <Result /> }/>
-          </Routes>
-        </BrowserRouter>
-      </OptionsProvider>
-    </OptionZoneProvider>
+    <OptionsCheckout>
+      <OptionZoneProvider>
+        <OptionsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={ <Home /> }/>
+              <Route path="/result" element={ <Result /> }/>
+            </Routes>
+          </BrowserRouter>
+        </OptionsProvider>
+      </OptionZoneProvider>
+    </OptionsCheckout>
 
   );
 }

@@ -8,14 +8,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
-$primaryCustom: rgba(48, 255, 241, 1);
+$primaryCustom: rgb(0, 242, 226);
 $primary: $primaryCustom;
-$primaryPure: rgb(48, 255, 241);
+$primaryPure: rgb(0, 242, 226);
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 :root{
-  --primary: rgba(48, 255, 241, 1);
+  --primary: rgb(0, 242, 226);
 }
 
 .main-title{
@@ -569,11 +569,25 @@ strong.main-title {
   background-color: var(--primary);
 }
 
+
 .form-editor{
   background-color: #ffffff;
 }
+
+
+@media (max-width: 767px){
+  .payment-name-container{
+    font-size: 14px;
+  }
+}
+
 
 .payment-img {
   width: 53px;
   height: auto;
 }
+
+.payment-method{
+  background-color: #fff;
+}
+

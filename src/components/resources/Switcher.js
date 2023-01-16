@@ -2,9 +2,9 @@ import { useState } from "react";
 import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import DetailOptionEditor from "./EditZone/DetailOptionEditor";
+import DetailOptionEditor from "../EditZone/DetailOptionEditor";
 import { useContext } from 'react';
-import { OptionsContextObject } from '../context/optionsContextObject';
+import { OptionsContextObject } from '../../context/optionsContextObject';
 
 
 const SwitcherControl = styled(Switch)(({ theme }) => ({
