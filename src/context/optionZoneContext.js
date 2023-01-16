@@ -28,6 +28,12 @@ export const OptionZoneProvider = ({children}) => {
                 zoneTitle: "Para el checkout"
             });
         }
+
+        const moveDown = () =>{
+            document.getElementById("titleContainer").scrollIntoView();
+        }
+
+        moveDown();
     };
     
 
