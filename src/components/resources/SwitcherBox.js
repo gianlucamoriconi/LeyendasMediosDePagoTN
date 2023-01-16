@@ -9,7 +9,7 @@ import IOSSwitcher from '../resources/IOSSwitch';
 import PaymentChoContent from '../resources/PaymentChoContent';
 
 
-const SwitcherBox = ({content}) => {
+const SwitcherBox = ({content, changeValueTextPayment}) => {
 
     const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);    
 
@@ -17,17 +17,26 @@ const SwitcherBox = ({content}) => {
     const contentShowOrHide = (e) =>{
         if (switcherDisplay === true){
             setSwitcherDisplay(false);
+
         }
 
         else{
-            setSwitcherDisplay(true)
+            setSwitcherDisplay(true);
+
         }
     };
+
+    const handleChangeText = (e) =>{
+        const switchElement = e.target;
+        let entry = switchElement.closest(`div#${content.id}`);
+        entry = entry.querySelector(`input#${content.id}[type='text']`).value;
+        changeValueTextPayment(content.id, entry);
+    }
 
     return(
     <div key={content.id} id={content.id} className='payment-method d-flex flex-wrap w-100 p-3 mb-4 shadow-sm border rounded'>
         <div className='payment-header d-flex w-100 justify-content-between'>
-            <div className='payement-title-container d-flex'>
+            <div className='payment-title-container d-flex'>
                 <div className='payment-name-container'>
                     {content.paymentName}
                 </div>
@@ -44,7 +53,7 @@ const SwitcherBox = ({content}) => {
                 </Stack>
             </div>
         </div>
-        {switcherDisplay === true ? <PaymentChoContent objectContent={content}/> : console.log(content.dataContext.display)}
+        {switcherDisplay === true ? <PaymentChoContent objectContent={content} handleChangeText={handleChangeText}/> : null}
     </div>
     )
 

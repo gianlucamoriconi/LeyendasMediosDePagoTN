@@ -12,15 +12,7 @@ import SwitcherBox from '../../resources/SwitcherBox';
 
 const EditCheckout = () => {
 
-    const { paymentMethodsData, 
-        mercadopago_transparent_card,
-        mercadopago_redirect,
-        mercadopago_transparent_offline,
-        UALA_PROD,
-        custom_payment_wire_transfer_production,
-        custom_payment_cash_production,
-        custom_payment_other_production 
-    } = useContext(OptionsContextCheckout);
+    const { paymentMethodsData, changeValueTextPayment } = useContext(OptionsContextCheckout);
 
 
     return (
@@ -31,7 +23,7 @@ const EditCheckout = () => {
                 <div className='payment-methods-container'>
                     {
                         paymentMethodsData.map((payment) => {
-                            return <SwitcherBox key={payment.id} content={payment}/>
+                            return <SwitcherBox key={payment.id} content={payment} changeValueTextPayment={changeValueTextPayment} />
                         })
                     }
                 </div>
