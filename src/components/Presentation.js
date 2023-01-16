@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 
 const Presentation = ({zone, handleEditZoneSelected}) => {
 
+    const moveDown = () =>{
+        document.getElementById("titleContainer").scrollIntoView();
+    }
+
     return (
         <>
             <div id="presentation" className='hv-90 p-5 d-flex flex-wrap justify-content-center'>
@@ -16,8 +20,8 @@ const Presentation = ({zone, handleEditZoneSelected}) => {
                     <p className='text-center'>Por ejemplo, si configurás 2 leyendas para "Productos en listado", la que tengas actualmente desaparecerá y en su lugar aparecerán las 2 que configuraste acá.</p>
                 </div>
                 <div className='position-absolute start-buttons-container'>
-                    <button id='storefront' onClick={handleEditZoneSelected} className={'btn btn-primary start-button shadow me-3' + (zone.zone === "storefront" ? " active" : "")}>Para la tienda</button>
-                    <button id='checkout' onClick={handleEditZoneSelected} className={'btn btn-primary start-button shadow ms-3' + (zone.zone === "checkout" ? " active" : "")}>Checkout</button>
+                    <button id='storefront' onClick={(handleEditZoneSelected, moveDown)} className={'btn btn-primary start-button shadow me-3' + (zone.zone === "storefront" ? " active" : "")}>Para la tienda</button>
+                    <button id='checkout' onClick={(handleEditZoneSelected, moveDown)} className={'btn btn-primary start-button shadow ms-3' + (zone.zone === "checkout" ? " active" : "")}>Checkout</button>
                 </div>
             </div>
         </>
