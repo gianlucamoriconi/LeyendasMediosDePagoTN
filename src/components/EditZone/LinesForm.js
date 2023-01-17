@@ -4,8 +4,19 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState, useContext } from 'react';
 import { OptionsContextObject } from '../../context/optionsContextObject';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const LinesForm = (props) => {
+    const [interes, setInteres] = useState('');
+
+    const handleChangeInterest = (event) => {
+      setInteres(event.target.value);
+    };
+
     const {zone} = props;
     const [lines, setLines] = useState([]);
     const { handleAddLineInObject,
@@ -114,7 +125,7 @@ const LinesForm = (props) => {
                 <Box className='mb-4 w-100'
                     component="form"
                     sx={{
-                        '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        '& .MuiTextField-root': { m: 1 },
                     }}
                     noValidate
                     autoComplete="off"
@@ -123,31 +134,55 @@ const LinesForm = (props) => {
 
                         if (line.typefield === "installments"){
                             return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap">
-                                <TextField
-                                    value={line.numberInput > 0 ? line.numberInput : '' }
-                                    required
-                                    id="numberInput"
-                                    label="Número de cuotas"
-                                    type="number"
-                                    InputLabelProps={{
-                                    shrink: true,
-                                    }}
-                                    variant="filled"
-                                    onChange={handleChange}
-                                />
-                                <TextField
-                                value={line.paymentMethodInput || ''}
-                                required
-                                label="Nombre del medio de pago"
-                                id="paymentMethodInput"
-                                onChange={handleChange}
-                                />
-                                <button id={line.id} type="button" className='btn trash-button' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
+                                <div className='d-flex col-12 col-md-6'>
+                                    <TextField
+                                        value={line.numberInput > 0 ? line.numberInput : '' }
+                                        required
+                                        id="numberInput"
+                                        label="Número de cuotas"
+                                        type="number"
+                                        InputLabelProps={{
+                                        shrink: true,
+                                        }}
+                                        variant="filled"
+                                        onChange={handleChange}
+                                        fullWidth
+                                    />
+                                    <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                        <Select
+                                        value={interes}
+                                        onChange={handleChangeInterest}
+                                        displayEmpty
+                                        inputProps={{ 'aria-label': 'Without label' }}
+                                        fullWidth
+                                        >
+                                        <MenuItem value="">
+                                            <em>¿Interés?</em>
+                                        </MenuItem>
+                                        <MenuItem value={'withoutInterest'}>sin interés</MenuItem>
+                                        <MenuItem value={'withInterest'}>con interés</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                                <div className='d-flex col-12 col-md-6'>
+                                    <TextField
+                                        value={line.paymentMethodInput || ''}
+                                        required
+                                        label="Nombre del medio de pago"
+                                        id="paymentMethodInput"
+                                        onChange={handleChange}
+                                        fullWidth
+                                    />
+                                
+
+
+                                    <button id={line.id} type="button" className='btn trash-button' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
+                                </div>
                             </div>)
                         }
 
                         else if (line.typefield === "discount"){
-                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap fade-in-up">
+                            return(<div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config fade-in-up">
                                 <TextField
                                     value={line.numberInput > 0 ? line.numberInput : '' }
                                     required
@@ -159,13 +194,15 @@ const LinesForm = (props) => {
                                     }}
                                     variant="filled"
                                     onChange={handleChange}
+                                    fullWidth
                                 />
                                 <TextField
                                 value={line.paymentMethodInput || ''}
                                 required
                                 label="Nombre del medio de pago"
                                 id="paymentMethodInput"
-                                onChange={handleChange} 
+                                onChange={handleChange}
+                                fullWidth
                                 />
                                 <button id={line.id} type="button" className='btn trash-button' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
                             </div>)
@@ -175,10 +212,10 @@ const LinesForm = (props) => {
                 </Box>
                 <div className='d-flex w-100'>
                     <div className='col-6 pe-3'>
-                        <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button w-100'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
+                        <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button shadow-sm w-100'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
                     </div>
                     <div className='col-6'>
-                        <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button w-100'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
+                        <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button shadow-sm w-100'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
                     </div>
                 </div>
 

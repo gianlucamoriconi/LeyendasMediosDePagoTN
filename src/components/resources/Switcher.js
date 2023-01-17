@@ -9,6 +9,7 @@ import { OptionsContextObject } from '../../context/optionsContextObject';
 
 const SwitcherControl = styled(Switch)(({ theme }) => ({
     padding: 8,
+    margin: 0,
     '& .MuiSwitch-track': {
       borderRadius: 22 / 2,
       '&:before, &:after': {
@@ -67,7 +68,7 @@ const Switcher = (props) => {
 
     return(
     <>
-        <FormControlLabel className="mb-2 label-fw-light" onChange={(e) => contentShowOrHide(e)}
+        <FormControlLabel className="mb-2 me-0 label-fw-light" onChange={(e) => contentShowOrHide(e)}
         control={<SwitcherControl defaultChecked={switcherDefault} />}
         label={labelName}
         />

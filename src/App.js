@@ -1,7 +1,8 @@
 import './scss/style.scss';
 import './App.css';
 import Home from './components/Home';
-import Result from './components/Result';
+import ResultStorefront from './components/ResultStorefront';
+import ResultCheckout from './components/ResultCheckout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { OptionsProvider } from './context/optionsContextObject';
 import { OptionZoneProvider } from './context/optionZoneContext';
@@ -18,7 +19,8 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={ <Home /> }/>
-              <Route path="/result" element={ <Result /> }/>
+              <Route path="/result-storefront" element={ <ResultStorefront /> }/>
+              <Route path="/result-checkout" element={ <ResultCheckout /> }/>
             </Routes>
           </BrowserRouter>
         </OptionsProvider>

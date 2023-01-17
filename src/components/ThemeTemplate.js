@@ -1,5 +1,5 @@
 
-import { Amazonas, Simple, Idea, Atlantico, Silent, Lifestyle, Material } from './scriptsByTheme/allThemes';
+import { Amazonas, Simple, Trend, Idea, Atlantico, Silent, Lifestyle, Material } from './scriptsByTheme/allThemes';
 
 
 const ThemeTemplate = (props) => {
@@ -30,6 +30,10 @@ const ThemeTemplate = (props) => {
 
     else if(theme === "lifestyle"){
         return <Lifestyle/>
+    }
+
+    else if(theme === "trend"){
+        return <Trend/>
     }
 
     else if(theme === "material"){

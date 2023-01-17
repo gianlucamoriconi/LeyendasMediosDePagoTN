@@ -9,22 +9,29 @@ import IOSSwitcher from '../resources/IOSSwitch';
 import PaymentChoContent from '../resources/PaymentChoContent';
 
 
-const SwitcherBox = ({content, changeValueTextPayment}) => {
+const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) => {
 
     const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);    
 
 
     const contentShowOrHide = (e) =>{
         if (switcherDisplay === true){
+            //Ocultar contenido
             setSwitcherDisplay(false);
 
+            //Guardar display false para el objeto en página Resultado 
+            changeDisplayPayment(content.id, false);
         }
 
         else{
+            //Mostrar contenido
             setSwitcherDisplay(true);
 
+            //Guardar display true para el objeto en página Resultado 
+            changeDisplayPayment(content.id, true);
         }
     };
+    
 
     const handleChangeText = (e) =>{
         const switchElement = e.target;

@@ -27,7 +27,7 @@ const EditZone = ({zone}) => {
                 <Box component={<Cart/>}/>
                 <Box component={<DetailModal/>}/>          
                 <button onClick={seeObject}>Ver objeto en consola</button>
-                <Link to="/result" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
+                <Link to="/result-storefront" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
                 </>
             :
                 <EditCheckout/>

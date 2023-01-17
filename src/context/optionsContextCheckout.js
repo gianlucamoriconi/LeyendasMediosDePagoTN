@@ -129,36 +129,43 @@ export const OptionsCheckout = ({children}) => {
             console.log(custom_payment_other_production.text);
         }
     }
-    
 
-    const contentShowOrHide = (e) =>{
-        const switcherId = e.target.id; //this is payment ID, which matches with payment const's state
-        
-        if (switcherId === "mercadopago_transparent_card") {
-
-                if (mercadopago_transparent_card.display === false) {
-
-                    mercadopago_transparent_card.display = true;
-        
-                    set_mercadopago_transparent_card(mercadopago_transparent_card);
-                    console.log(mercadopago_transparent_card);
-                }
-
-                else if (mercadopago_transparent_card.display === true){
-                    mercadopago_transparent_card.display = false;
-        
-                    set_mercadopago_transparent_card(mercadopago_transparent_card);
-                    console.log(mercadopago_transparent_card);
-                }
-
-                else{
-                    console.log(mercadopago_transparent_card);
-                    throw Error ("Seems there's no display property :O");
-                }
-                
+    const changeDisplayPayment = (paymentId, displaySet) => {
+        if (paymentId === 'mercadopago_transparent_card') {
+            mercadopago_transparent_card.display = displaySet;
+            set_mercadopago_transparent_card(mercadopago_transparent_card);
         }
 
-    };
+        else if (paymentId === 'mercadopago_redirect') {
+            mercadopago_redirect.display = displaySet;
+            set_mercadopago_redirect(mercadopago_redirect);
+        }
+
+        else if (paymentId === 'mercadopago_transparent_offline') {
+            mercadopago_transparent_offline.display = displaySet;
+            set_mercadopago_transparent_offline(mercadopago_transparent_offline);
+        }
+
+        else if (paymentId === 'UALA_PROD') {
+            UALA_PROD.display = displaySet;
+            set_UALA_PROD(UALA_PROD)
+        }
+
+        else if (paymentId === 'custom_payment_wire_transfer_production') {
+            custom_payment_wire_transfer_production.display = displaySet;
+            set_custom_payment_wire_transfer_production(custom_payment_wire_transfer_production);
+        }
+
+        else if (paymentId === 'custom_payment_cash_production') {
+            custom_payment_cash_production.display = displaySet;
+            set_custom_payment_cash_production(custom_payment_cash_production);
+        }
+
+        else if (paymentId === 'custom_payment_other_production') {
+            custom_payment_other_production.display = displaySet;
+            set_custom_payment_other_production(custom_payment_other_production);
+        }
+    }
 
 
     return (
@@ -177,10 +184,10 @@ export const OptionsCheckout = ({children}) => {
             set_custom_payment_wire_transfer_production,
             set_custom_payment_cash_production,
             set_custom_payment_other_production,
-            contentShowOrHide,
             totalSelectionCHO,
             paymentMethodsData,
-            changeValueTextPayment
+            changeValueTextPayment,
+            changeDisplayPayment
         }}>
           {children}
         </OptionsContextCheckout.Provider>
