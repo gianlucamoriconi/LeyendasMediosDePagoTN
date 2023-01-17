@@ -10,13 +10,17 @@ import { useContext } from 'react';
 
 
 
-const EditZone = ({zone}) => {
+const EditZone = ({zone, handleEditZoneSelected}) => {
 
     const { seeObject } = useContext(OptionsContextObject);
     
     return (
         <>
-        <section id="editZone" className='col p-md-5 p-3 d-flex flex-wrap m-auto max-width-900 overflow-hidden'>
+        <section id="editZone" className='col p-3 d-flex flex-wrap m-auto max-width-900'>
+            <div className='start-buttons-container w-100 d-flex justify-content-center'>
+                    <button id='storefront' onClick={handleEditZoneSelected} className={'btn btn-primary start-button shadow me-3' + (zone.zone === "storefront" ? " active" : "")}>Para la tienda</button>
+                    <button id='checkout' onClick={handleEditZoneSelected} className={'btn btn-primary start-button shadow ms-3' + (zone.zone === "checkout" ? " active" : "")}>Checkout</button>
+            </div>
             <div id="titleContainer" className='pb-4 pt-4 mb-3 mt-5 w-100'>
                 <h2 className='main-title mb-0'>{zone.zoneTitle}</h2>
             </div>

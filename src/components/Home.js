@@ -14,9 +14,9 @@ const Home = () => {
 
     return (
         <>
-            <Presentation zone={zone} handleEditZoneSelected={handleEditZoneSelected}/>
+            <Presentation zone={zone}/>
             <div className='d-flex bg-light'>
-                <EditZone zone={zone}/>
+                <EditZone zone={zone} handleEditZoneSelected={handleEditZoneSelected}/>
                 <Footer color="light"/>
             </div>
         </>

@@ -186,6 +186,10 @@ font-family: 'Manrope', sans-serif;
   max-width: 900px;
 }
 
+.min-vh-90{
+  min-height: 90vh;
+}
+
 .btn-primary{
 font-family: 'Manrope', sans-serif;
 }
@@ -573,8 +577,8 @@ strong.main-title {
   @include background-opacity($primaryPure, $opacity: 0.3);
 }
 
-.start-buttons-container{
-  bottom: 7vh;
+.start-buttons-container {
+  margin-top: -5vh;
 }
 
 .start-button{
