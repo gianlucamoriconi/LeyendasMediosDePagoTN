@@ -1,8 +1,9 @@
-import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import ModalCustom from './resources/ModalCustom';
 
 
 
-const Presentation = ({zone}) => {
+const Presentation = () => {
+    const bodyModal = "<div><p className='fs-sm-7 mb-0'>Las leyendas que configures van a reemplazar a todas las que tenés actualmente en cada parte del diseño.</p><p className='fs-sm-7 mb-0'>Por ejemplo, si configurás 2 leyendas para \"Productos en listado\", la que tengas actualmente desaparecerá y en su lugar aparecerán las 2 que configuraste acá.</p></div>";
 
     return (
         <>
@@ -15,8 +16,8 @@ const Presentation = ({zone}) => {
                         <p className='text-center fw-bold fs-sm-7 mb-0'>Antes de usar esta app recordá que no es una solución definitiva para tus leyendas sino un parche.</p> 
                         <p className='text-center fw-bold fs-sm-7 mb-0'>Lo ideal, es que primero reportes el error o pedido de mejora a Tiendanube para que puedan trabajar en una solución de raíz, luego usar la app.</p> 
                     </div>
-                    <div className='d-flex w-100 m-auto d-md-none'>
-                        <a href="#how-to-use" className='text-center w-100'><AiOutlineQuestionCircle style={{ height: 18, width: 18, marginRight: 5}}></AiOutlineQuestionCircle>¿Cómo funcionan estas leyendas?</a>
+                    <div className='text-center d-md-none'>
+                        <ModalCustom buttonText={"¿Cómo funcionan las leyendas?"} title={"¿Cómo funcionan las leyendas?"} body={bodyModal} question={true}/>
                     </div>                    
                     <div className='how-to-use d-none d-md-block line-height-29'>
                     <div className='title-styled d-flex m-auto mb-3'>

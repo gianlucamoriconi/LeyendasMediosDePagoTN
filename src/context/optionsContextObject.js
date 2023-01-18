@@ -60,7 +60,9 @@ export const OptionsProvider = ({children}) => {
                     if (line.id === lineObject.id){
                       line.numberInput = lineObject.numberInput;
                       line.paymentMethodInput = lineObject.paymentMethodInput;
-                      setItemProducts([...itemProducts]);
+                      line.interest = lineObject.interest;
+                      
+                      return setItemProducts([...itemProducts]);
                     }
                   });
             } else {
@@ -74,6 +76,9 @@ export const OptionsProvider = ({children}) => {
                     if (line.id === lineObject.id){
                       line.numberInput = lineObject.numberInput;
                       line.paymentMethodInput = lineObject.paymentMethodInput;
+                      if (line.interest) {
+                        line.interest = lineObject.interest;
+                      }
                       setDetailMain([...detailMain]);
                     }
                   });
@@ -88,6 +93,9 @@ export const OptionsProvider = ({children}) => {
                     if (line.id === lineObject.id){
                       line.numberInput = lineObject.numberInput;
                       line.paymentMethodInput = lineObject.paymentMethodInput;
+                      if (line.interest) {
+                        line.interest = lineObject.interest;
+                      }
                       setCart([...cart]);
                     }
                   });
@@ -169,6 +177,7 @@ export const OptionsProvider = ({children}) => {
                 modalMercadopago.map((box) => {
                     if (box.id === boxObject.id){
                       box.numberInstallment = boxObject.numberInstallment;
+                      box.interest = boxObject.interest;
                       setModalMercadopago([...modalMercadopago]);
                     }
                   });
@@ -182,6 +191,7 @@ export const OptionsProvider = ({children}) => {
                 modalMobbex.map((box) => {
                     if (box.id === boxObject.id){
                         box.numberInstallment = boxObject.numberInstallment;
+                        box.interest = boxObject.interest;
                         setModalMobbex([...modalMobbex]);
                     }
                   });
@@ -195,6 +205,7 @@ export const OptionsProvider = ({children}) => {
                 modalPagonube.map((box) => {
                     if (box.id === boxObject.id){
                         box.numberInstallment = boxObject.numberInstallment;
+                        box.interest = boxObject.interest;
                         setModalPagonube([...modalPagonube]);
                     }
                   });
@@ -209,6 +220,7 @@ export const OptionsProvider = ({children}) => {
                 modalUala.map((box) => {
                     if (box.id === boxObject.id){
                         box.numberInstallment = boxObject.numberInstallment;
+                        box.interest = boxObject.interest;
                         setModalUala([...modalUala]);
                     }
                   });
@@ -224,6 +236,7 @@ export const OptionsProvider = ({children}) => {
                 modalModo.map((box) => {
                     if (box.id === boxObject.id){
                         box.numberInstallment = boxObject.numberInstallment;
+                        box.interest = boxObject.interest;
                         setModalModo([...modalModo]);
                     }
                   });
@@ -294,7 +307,9 @@ export const OptionsProvider = ({children}) => {
         }
     }
 
-    
+    const seeObject = () =>{
+        console.log(totalSelection);
+    }
 
     return (
         <OptionsContextObject.Provider value={{
@@ -321,7 +336,8 @@ export const OptionsProvider = ({children}) => {
             handleAddBoxInObject,
             handleRemoveBoxInObject,
             totalSelection,
-            totalSelectionModal
+            totalSelectionModal,
+            seeObject
         }}>
           {children}
         </OptionsContextObject.Provider>

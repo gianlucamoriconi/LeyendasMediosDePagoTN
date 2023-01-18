@@ -570,7 +570,7 @@ strong.main-title {
 
 @media (max-width: 767px){
   .add-line-button {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 .btn-primary.add-line-button{
@@ -610,4 +610,21 @@ strong.main-title {
 
 .payment-method{
   background-color: #fff;
+}
+
+.line-config .form-control{
+  font-size: 14px;
+
+  &::placeholder{
+    font-size: 13px;
+  }
+}
+
+
+.line-config .form-select{
+  font-size: 14px;
+
+  &::placeholder{
+    font-size: 13px;
+  }
 }

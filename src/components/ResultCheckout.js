@@ -3,12 +3,6 @@ import CopyToClipboard from './CopyToClipboard';
 import Menu from './Menu';
 import { useContext, useState } from 'react';
 import { OptionsContextCheckout } from '../context/optionsContextCheckout';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import ThemeTemplate from './ThemeTemplate';
 import { Link } from "react-router-dom";
 import { paymentBenefitScript } from './scriptsCheckout/paymentBenefit'
 
@@ -23,7 +17,7 @@ const ResultCheckout = () => {
     return (
         <div className='d-flex bg-light'>
             <Link to='/' className='btn btn-secondary position-fixed'>Volver a edición</Link>           
-            <div className='max-width-900 p-5 d-flex flex-wrap m-auto'>
+            <div className='p-5 d-flex flex-wrap m-auto max-width-900'>
                 <div id="titleContainer" className='pb-4 pt-4 mb-3 mt-5 w-100'>
                     <h2 className='main-title mb-0'>Copiá y pegá este código</h2>
                     <p>en la sección <strong>Configuraciones &gt; Códigos de tracking (Para el checkout)</strong></p>

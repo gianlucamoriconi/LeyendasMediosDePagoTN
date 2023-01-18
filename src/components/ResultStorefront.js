@@ -22,9 +22,9 @@ const Result = () => {
     };
 
     return (
-        <div className='d-flex bg-light'>
-            <Link to='/' className='btn btn-secondary'>Volver</Link>
-            <div className='p-5 d-flex flex-wrap ms-auto'>
+        <div className='bg-light overflow-hidden'>
+            <Link to='/' className='btn btn-secondary position-fixed'>Volver</Link>
+            <div className='p-5 d-flex flex-wrap m-auto max-width-900'>
                 <div id="titleContainer" className='pb-4 pt-4 mb-3 mt-5 w-100'>
                     <h2 className='main-title mb-0'>Copiá y pegá este código</h2>
                     <p>para luego copiar el código que corresponde a tu diseño.</p>

@@ -6,12 +6,23 @@ import EditCheckout from './Zones/EditCheckout';
 import Cart from './Zones/Cart';
 import { Link } from "react-router-dom";
 import { OptionsContextObject } from '../../context/optionsContextObject';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import Form from 'react-bootstrap/Form';
 
 
 
 const EditZone = ({zone, handleEditZoneSelected}) => {
 
+    const [validated, setValidated] = useState(false);
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+    };
     const { seeObject } = useContext(OptionsContextObject);
     
     return (
@@ -25,14 +36,16 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
                 <h2 className='main-title mb-0'>{zone.zoneTitle}</h2>
             </div>
             {zone.zone === "storefront" ?
-                <>
-                <Box component={<Items/>}/>
-                <Box component={<DetailMain/>}/>
-                <Box component={<Cart/>}/>
-                <Box component={<DetailModal/>}/>          
-                <button onClick={seeObject}>Ver objeto en consola</button>
-                <Link to="/result-storefront" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
-                </>
+            <>
+                
+                    <Box component={<Items/>}/>
+                    <Box component={<DetailMain/>}/>
+                    <Box component={<Cart/>}/>
+                    <Box component={<DetailModal/>}/>          
+                    <button onClick={seeObject}>Ver objeto en consola</button>
+                    <Link type="submit" to="/result-storefront" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
+
+            </>
             :
                 <EditCheckout/>
             }
