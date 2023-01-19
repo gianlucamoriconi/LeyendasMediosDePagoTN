@@ -141,7 +141,7 @@ const LinesForm = (props) => {
                                     </div>
                                 </div>
                                 <div className='d-flex col-1 justify-content-end'>
-                                    <button id={line.id} type="button" className='trash-button border-0 rounded' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
+                                    <button id={line.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
                                 </div>
                             </div>
                         )
@@ -163,7 +163,7 @@ const LinesForm = (props) => {
                                 </div>
                                 </div>
                             <div className='d-flex col-1 justify-content-end'>
-                                <button id={line.id} type="button" className='trash-button border-0 rounded' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
+                                <button id={line.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
                             </div>
                         </div>)
                     }
