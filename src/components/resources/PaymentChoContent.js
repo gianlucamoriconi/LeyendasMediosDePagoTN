@@ -1,5 +1,4 @@
-import TextField from '@mui/material/TextField';
-
+import Form from 'react-bootstrap/Form';
 
 
 const PaymentChoContent = ({objectContent, handleChangeText}) => {
@@ -8,7 +7,9 @@ const PaymentChoContent = ({objectContent, handleChangeText}) => {
     <>
 
         <div className="container-lines-config w-100 mt-4">
-          <TextField id={objectContent.id} onChange={handleChangeText} size="small" label="Ej: 6 cuotas sin interés" variant="outlined" />
+          <Form.Group className="w-100" controlId={objectContent.id}>
+              <Form.Control onChange={handleChangeText} value={objectContent.dataContext.text ? objectContent.dataContext.text : ''} data-id={objectContent.id} type="text" required placeholder="Ej: 6 cuotas sin interés" />
+          </Form.Group>
         </div>
     </>
   )

@@ -23,8 +23,12 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
 
         setValidated(true);
     };
-    const { seeObject } = useContext(OptionsContextObject);
+    const { seeObject, totalSelectionModalOptimized, totalSelection } = useContext(OptionsContextObject);
     
+    const verInfoTotal = () => {
+        console.log(totalSelection);
+    }
+
     return (
         <>
         <section id="editZone" className='col p-3 d-flex flex-wrap m-auto max-width-900'>
@@ -42,7 +46,7 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
                     <Box component={<DetailMain/>}/>
                     <Box component={<Cart/>}/>
                     <Box component={<DetailModal/>}/>          
-                    <button onClick={seeObject}>Ver objeto en consola</button>
+                    <button onClick={verInfoTotal}>Ver objeto en consola</button>
                     <Link type="submit" to="/result-storefront" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
 
             </>

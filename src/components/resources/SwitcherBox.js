@@ -11,8 +11,7 @@ import PaymentChoContent from '../resources/PaymentChoContent';
 
 const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) => {
 
-    const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);    
-
+    const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);  
 
     const contentShowOrHide = (e) =>{
         if (switcherDisplay === true){
@@ -55,8 +54,8 @@ const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) =>
                 }
             </div>
             <div className='payment-switch-container'>
-                <Stack direction="row" spacing={1} alignItems="center">
-                    <IOSSwitcher object={content} onOff={contentShowOrHide} inputProps={{ 'aria-label': 'iOS design' }}/>
+                <Stack key={content.id} direction="row" spacing={1} alignItems="center">
+                    <IOSSwitcher key={content.id} object={content} checked={switcherDisplay} onOff={contentShowOrHide} inputProps={{ 'aria-label': 'iOS design' }}/>
                 </Stack>
             </div>
         </div>

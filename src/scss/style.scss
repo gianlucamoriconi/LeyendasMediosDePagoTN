@@ -182,6 +182,10 @@ font-family: 'Manrope', sans-serif;
   max-width: 200px;
 }
 
+.max-width-500{
+  max-width: 500px;
+}
+
 .max-width-900{
   max-width: 900px;
 }
@@ -622,6 +626,23 @@ strong.main-title {
 
 
 .line-config .form-select{
+  font-size: 14px;
+
+  &::placeholder{
+    font-size: 13px;
+  }
+}
+
+.box-config .form-control{
+  font-size: 14px;
+
+  &::placeholder{
+    font-size: 13px;
+  }
+}
+
+
+.box-config .form-select{
   font-size: 14px;
 
   &::placeholder{

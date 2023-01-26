@@ -3,7 +3,7 @@ import ModalCustom from './resources/ModalCustom';
 
 
 const Presentation = () => {
-    const bodyModal = "<div><p className='fs-sm-7 mb-0'>Las leyendas que configures van a reemplazar a todas las que tenés actualmente en cada parte del diseño.</p><p className='fs-sm-7 mb-0'>Por ejemplo, si configurás 2 leyendas para \"Productos en listado\", la que tengas actualmente desaparecerá y en su lugar aparecerán las 2 que configuraste acá.</p></div>";
+    const bodyModal = "Las leyendas que configures van a reemplazar a todas las que tenés actualmente en cada parte del diseño. Por ejemplo, si configurás 2 leyendas para \"Productos en listado\", la que tengas actualmente desaparecerá y en su lugar aparecerán las 2 que configuraste acá.";
 
     return (
         <>

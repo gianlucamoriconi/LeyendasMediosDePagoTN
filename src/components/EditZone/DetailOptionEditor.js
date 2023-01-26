@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState, useContext } from 'react';
 import { OptionsContextObject } from '../../context/optionsContextObject';
+import Form from 'react-bootstrap/Form';
+
 
 const DetailOptionEditor = (props) => {
     const { paymentTab, savedId, idSelector } = props;
@@ -47,11 +49,13 @@ const DetailOptionEditor = (props) => {
     const getObject = (e) =>{
         const boxChangingId = e.target.closest(".box-config").getAttribute("id");
         const numberInput = e.target.closest(".box-config").querySelector("#numberInput").value;
+        const interest = e.target.closest(".box-config").querySelector(".interest-select").value;
 
         const boxObjectToAdd = {
             id: Number(boxChangingId) || '',
             savedId: savedId || '',
             numberInstallment: Number(numberInput) || '',
+            interest: interest,
             idSelector: idSelector
         }
 
@@ -74,7 +78,7 @@ const DetailOptionEditor = (props) => {
     return (
 
             <div>
-                <Box className='mb-4'
+                <Box className='mb-4 d-flex flex-wrap'
                     component="form"
                     sx={{
                         '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -84,21 +88,22 @@ const DetailOptionEditor = (props) => {
                 >
                     {totalSelectionModal[savedId].map((box) =>{
 
-                            return(<div key={box.id} id={box.id} data-type={box.savedId} className="d-flex box-config">
-                                <TextField
-                                    value={box.numberInstallment > 0 ? box.numberInstallment : '' }
-                                    required
-                                    id="numberInput"
-                                    label="Número de cuotas"
-                                    type="number"
-                                    InputLabelProps={{
-                                    shrink: true,
-                                    }}
-                                    variant="filled"
-                                    onChange={handleChange}
-                                />
-                                <button id={box.id} type="button" className='btn trash-button' onClick={(e) => removeBox(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
-                            </div>)
+                            return(
+                            <div key={box.id} id={box.id} className="d-flex box-config w-100 max-width-500 pt-3" data-type={box.savedId}>
+                                <Form.Group className="d-flex col-3 pe-2" controlId="numberInput">
+                                    <Form.Control value={box.numberInstallment > 0 ? box.numberInstallment : '' } data-id={box.id} type="number" required placeholder="Ej: 6" onChange={handleChange} />
+                                </Form.Group>
+                                <Form.Group className="d-flex col-8 pe-2" controlId="interest-select">
+                                    <Form.Select className='interest-select' aria-label='interest-select' onChange={handleChange}>
+                                        <option data-id={box.id} className='interest-option' value={false}>sin interés</option>
+                                        <option data-id={box.id} className='interest-option' value={true}>con interés</option>
+                                    </Form.Select>
+                                </Form.Group>
+                                <div className='d-flex col-1 justify-content-end'>
+                                    <button id={box.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeBox(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
+                                </div>
+                            </div>
+                            )
                     })}
                 </Box>
                 <button onClick={(e) => addNewBoxInstallment()} className='btn btn-primary shadow add-line-button me-3'><IoIosAddCircleOutline className="add-circle"/>Nueva financiación</button>

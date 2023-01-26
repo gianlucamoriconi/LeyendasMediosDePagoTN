@@ -27,7 +27,6 @@ export const OptionsProvider = ({children}) => {
     const [modalGocuotas, setModalGocuotas] = useState(initModalGocuotas);
     const [modalUala, setModalUala] = useState(initModalUala);
 
-
     const totalSelectionModal = {
         modalMercadopago: modalMercadopago,
         modalMobbex: modalMobbex,
@@ -38,13 +37,60 @@ export const OptionsProvider = ({children}) => {
         modalGocuotas: modalGocuotas
     };
 
+    //Dejamos solo los que tienen información
+    const totalSelectionModalOptimized = () =>{
+        var totalSelectionModalOptimizedObject = [];
+
+        if (modalMercadopago.length > 0) {
+            totalSelectionModalOptimizedObject.modalMercadopago = modalMercadopago;
+        }
+
+        if (modalModo.length > 0) {
+            totalSelectionModalOptimizedObject.modalModo = modalModo;
+        }
+
+        if (modalMobbex.length > 0) {
+            totalSelectionModalOptimizedObject.modalMobbex = modalMobbex;
+        }
+
+        if (modalPagonube.length > 0) {
+            totalSelectionModalOptimizedObject.modalPagonube = modalPagonube;
+        }
+
+        if (modalUala.length > 0) {
+            totalSelectionModalOptimizedObject.modalUala = modalUala;
+        }
+        
+        if (modalDlocal.length > 0) {
+            totalSelectionModalOptimizedObject.modalDlocal = modalDlocal;
+        }
+        
+        if (modalGocuotas.length > 0) {
+            totalSelectionModalOptimizedObject.modalGocuotas = modalGocuotas;
+        }
+        
+        
+        return Object.keys(totalSelectionModalOptimizedObject).length !== 0 ? totalSelectionModalOptimizedObject : [];
+    }
+    
+    
+
+
     const totalSelection = {
         itemProducts: itemProducts,
         detailMain: detailMain,
         cart: cart,
-        totalSelectionModal
+        detailModalNew: totalSelectionModalOptimized(),
+        detaliModalOld: totalSelectionModal
     };
 
+    const totalSelectionArray = [
+        {itemProducts: itemProducts},
+        {detailMain: detailMain},
+        {cart: cart},
+        {detailModalNew: totalSelectionModalOptimized()},
+        {detaliModalOld: totalSelectionModal}
+    ];
 
     /* Handlers que construyen los objetos de:
         itemProducts,
@@ -121,6 +167,15 @@ export const OptionsProvider = ({children}) => {
         }
     }
 
+
+    /* 
+        Chequeo si existe esa misma linea (por su ID) para editarla o crearla:
+        itemProducts,
+        detailMain,
+        cart
+
+        Los de detailModal son diferentes, están más abajo.
+     */
     const isInObject = (line) => {
         if (line.place === "itemProducts"){
             return itemProducts.some((item) => item.id === line.id)
@@ -137,6 +192,9 @@ export const OptionsProvider = ({children}) => {
     }
 
 
+    /*
+        Chequeo si existe esa misma linea en detailModal (por su ID) para editarla o crearla.
+     */
     const isInObjectModal = (box) => {
         if (box.savedId === "modalMercadopago"){
             return modalMercadopago.some((item) => item.id === box.id)
@@ -168,7 +226,10 @@ export const OptionsProvider = ({children}) => {
     }
 
 
-    /* Handlers que construyen el objeto de: detailModal */
+    /* Handlers que construye el objeto de detailModal:
+        - handleAddBoxInObject
+        - handleRemoveBoxInObject
+    */
 
     const handleAddBoxInObject = (payment, boxObject) =>{
 
@@ -307,9 +368,14 @@ export const OptionsProvider = ({children}) => {
         }
     }
 
+
+    // Prueba en consola
     const seeObject = () =>{
         console.log(totalSelection);
     }
+
+
+    
 
     return (
         <OptionsContextObject.Provider value={{
@@ -337,6 +403,8 @@ export const OptionsProvider = ({children}) => {
             handleRemoveBoxInObject,
             totalSelection,
             totalSelectionModal,
+            totalSelectionArray,
+            totalSelectionModalOptimized,
             seeObject
         }}>
           {children}

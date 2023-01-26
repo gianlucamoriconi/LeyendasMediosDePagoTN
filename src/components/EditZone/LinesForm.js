@@ -16,8 +16,6 @@ const LinesForm = (props) => {
 
     
     const getObject = (e) =>{
-        console.log(e);
-        console.log(e.target);
         let place = e.target.closest(".container-lines-config");
         place = place.getAttribute("id");
         const lineChangingId = e.target.closest(".line-config").getAttribute("id");
@@ -34,7 +32,8 @@ const LinesForm = (props) => {
         }
 
         if (typefield === "installments") {
-            const interest = e.target.value; //Boolean
+            console.log(e.target);
+            const interest = e.target.closest(".line-config").querySelector(".interest-select").value;
             lineObjectToAdd.interest = interest;
         }
         
@@ -104,7 +103,6 @@ const LinesForm = (props) => {
 
     const handleChange = (e) =>{
         const lineObjectToAdd = getObject(e);
-        console.log(lineObjectToAdd);
         handleAddLineInObject(zone, lineObjectToAdd);
     }
 
@@ -136,7 +134,7 @@ const LinesForm = (props) => {
                                     </div>
                                     <div className='d-flex col-12 col-md-6'>
                                         <Form.Group className="w-100" controlId="paymentMethodInput">
-                                            <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Medio de pago" onChange={handleChange} />
+                                            <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Medio de pago (opcional)" onChange={handleChange} />
                                         </Form.Group>
                                     </div>
                                 </div>

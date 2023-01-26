@@ -8,59 +8,78 @@ import { OptionsContextObject } from '../../../context/optionsContextObject';
 
 
 const DetailMain = () => {
+
   const {setModalMercadopago,
     setModalMobbex,
     setModalPagonube,
     setModalModo,
     setModalDlocal,
     setModalGocuotas,
-    setModalUala
+    setModalUala,
+    modalMercadopago,
+    modalMobbex,
+    modalPagonube,
+    modalUala,
+    modalModo,
+    modalDlocal,
+    modalGocuotas
   } = useContext(OptionsContextObject);
 
-    const payments = [
+
+
+  const payments = [
       {
         paymentName: "Mercadopago",
         savedId: "modalMercadopago",
         idSelector: "#installment_mercadopago_",
+        modalValues: modalMercadopago,
         setValues: setModalMercadopago
       },
       {
         paymentName: "Modo",
         savedId: "modalModo",
         idSelector: "#installment_modo_",
+        modalValues:modalModo,
         setValues: setModalModo
       },
       {
         paymentName: "Mobbex",
         savedId: "modalMobbex",
         idSelector: "#installment_mobbex_",
+        modalValues: modalMobbex,
         setValues: setModalMobbex
       },
       {
         paymentName: "Pagonube",
         savedId: "modalPagonube",
         idSelector: "#installment_pago_nube_",
+        modalValues: modalPagonube,
         setValues: setModalPagonube
       },
       {
         paymentName: "Uala",
         savedId: "modalUala",
         idSelector: "#installment_ualá_",
+        modalValues: modalUala,
         setValues: setModalUala
       },
       {
         paymentName: "Dlocal",
         savedId: "modalDlocal",
         idSelector: "#installment_dlocal_payments_",
+        modalValues: modalDlocal,
         setValues: setModalDlocal
       },
       {
         paymentName: "Gocuotas",
         savedId: "modalGocuotas",
         idSelector: "#installment_gocuotas_",
+        modalValues: modalGocuotas,
         setValues: setModalGocuotas
       }
     ];
+
+    
 
     return (
       <>
@@ -69,7 +88,7 @@ const DetailMain = () => {
           <div id="detailMainModal" className="container-lines-config">
             <FormGroup>
             {payments.map((payment, i) =>{
-              return (<Switcher setValues={payment.setValues} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={false} />)
+              return (<Switcher setValues={payment.setValues} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={payment.modalValues.length > 0 ? true : false} />)
             })
             }
             </FormGroup>

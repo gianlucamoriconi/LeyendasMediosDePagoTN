@@ -1,9 +1,5 @@
 import Title from './Title';
-import IOSSwitcher from '../../resources/IOSSwitch';
-import Stack from '@mui/material/Stack';
-import paymentMethods from '../../../payments/paymentMethods';
 import { Link } from 'react-router-dom';
-import PaymentChoContent from '../../resources/PaymentChoContent';
 import { useContext, useState, useEffect } from 'react';
 import { OptionsContextCheckout } from '../../../context/optionsContextCheckout';
 import SwitcherBox from '../../resources/SwitcherBox';
