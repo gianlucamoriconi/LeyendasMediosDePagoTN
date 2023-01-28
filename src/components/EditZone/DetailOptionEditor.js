@@ -11,16 +11,13 @@ const DetailOptionEditor = (props) => {
     const { paymentTab, savedId, idSelector } = props;
     const [boxesInDetail, setBoxesInDetail] = useState([]);
 
-    const { handleAddBoxInObject,
-            handleRemoveBoxInObject,
-            totalSelectionModal
-        } = useContext(OptionsContextObject);
+    const { payments, handleAddBoxInObject, handleRemoveBoxInObject } = useContext(OptionsContextObject);
 
 
     const addNewBoxInstallment = () => {
         var id = "";
         let idsArray = [];
-        totalSelectionModal[savedId].map((box) =>(
+        payments[savedId].map((box) =>(
             idsArray.push(box.id)
         ));
 
@@ -74,7 +71,6 @@ const DetailOptionEditor = (props) => {
         handleRemoveBoxInObject(savedId, idToDelete);
     };
 
-
     return (
 
             <div>
@@ -86,7 +82,7 @@ const DetailOptionEditor = (props) => {
                     noValidate
                     autoComplete="off"
                 >
-                    {totalSelectionModal[savedId].map((box) =>{
+                    {payments[savedId].map((box) =>{
 
                             return(
                             <div key={box.id} id={box.id} className="d-flex box-config w-100 max-width-500 pt-3" data-type={box.savedId}>

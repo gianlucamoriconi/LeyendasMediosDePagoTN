@@ -48,12 +48,9 @@ const Switcher = (props) => {
     const [switcherDefault, setSwitcherDefault]= useState(defaultCheckedValue);
     const [switcherOnOff, setSwitcherOnOff]= useState(defaultCheckedValue);
 
-    const { totalSelectionModal } = useContext(OptionsContextObject);
-
     const contentShowOrHide = (e) =>{
         if (switcherOnOff === true){
           setSwitcherOnOff(false);
-          setValues([]);
         }
 
         else{

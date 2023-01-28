@@ -11,7 +11,7 @@ const LinesForm = (props) => {
     const [lines, setLines] = useState([]);
     const { handleAddLineInObject,
             handleRemoveLineInObject,
-            totalSelection,
+            zonesInfo
         } = useContext(OptionsContextObject);
 
     
@@ -32,7 +32,6 @@ const LinesForm = (props) => {
         }
 
         if (typefield === "installments") {
-            console.log(e.target);
             const interest = e.target.closest(".line-config").querySelector(".interest-select").value;
             lineObjectToAdd.interest = interest;
         }
@@ -117,60 +116,60 @@ const LinesForm = (props) => {
     return (
 
             <>
-                {totalSelection[zone].map((line, index) =>{
-
-                    if (line.typefield === "installments"){
-                        return(
-                            <div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap pb-3 mb-4 border-bottom">
-                                <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
-                                    <div className='d-flex col-12 col-md-6 pb-2 pb-md-0 pe-md-3'>
-                                        <Form.Group className="w-100 pe-3" controlId="numberInput">
-                                            <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Número de cuota" onChange={handleChange} />
-                                        </Form.Group>
-                                        <Form.Select className='interest-select w-100' aria-label='interest-select' onChange={handleChange}>
-                                            <option data-id={line.id} className='interest-option' value={false}>sin interés</option>
-                                            <option data-id={line.id} className='interest-option' value={true}>con interés</option>
-                                        </Form.Select>
+                {zonesInfo[zone].map((line) =>{
+                        if (line.typefield === "installments"){
+                            return(
+                                <div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap pb-3 mb-4 border-bottom">
+                                    <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
+                                        <div className='d-flex col-12 col-md-6 pb-2 pb-md-0 pe-md-3'>
+                                            <Form.Group className="w-100 pe-3" controlId="numberInput">
+                                                <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Número de cuota" onChange={handleChange} />
+                                            </Form.Group>
+                                            <Form.Select className='interest-select w-100' aria-label='interest-select' onChange={handleChange}>
+                                                <option data-id={line.id} className='interest-option' value={false}>sin interés</option>
+                                                <option data-id={line.id} className='interest-option' value={true}>con interés</option>
+                                            </Form.Select>
+                                        </div>
+                                        <div className='d-flex col-12 col-md-6'>
+                                            <Form.Group className="w-100" controlId="paymentMethodInput">
+                                                <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Medio de pago (opcional)" onChange={handleChange} />
+                                            </Form.Group>
+                                        </div>
                                     </div>
-                                    <div className='d-flex col-12 col-md-6'>
-                                        <Form.Group className="w-100" controlId="paymentMethodInput">
-                                            <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Medio de pago (opcional)" onChange={handleChange} />
-                                        </Form.Group>
+                                    <div className='d-flex col-1 justify-content-end'>
+                                        <button id={line.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
                                     </div>
                                 </div>
+                            )
+                        }
+
+                        else if (line.typefield === "discount"){
+                            return(
+                            <div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap pb-3 mb-4 border-bottom">
+                                    <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
+                                    <div className='col-3 pe-3'>
+                                        <Form.Group className="w-100" controlId="numberInput">
+                                            <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Porcentaje de descuento (sin %)" onChange={handleChange} />
+                                        </Form.Group>
+                                    </div>
+                                    <div className='col-9'>
+                                        <Form.Group className="w-100" controlId="paymentMethodInput">
+                                            <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Nombre del medio de pago" onChange={handleChange} />
+                                        </Form.Group>
+                                    </div>
+                                    </div>
                                 <div className='d-flex col-1 justify-content-end'>
                                     <button id={line.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
                                 </div>
-                            </div>
-                        )
-                    }
+                            </div>)
+                        }
 
-                    else if (line.typefield === "discount"){
-                        return(
-                        <div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap pb-3 mb-4 border-bottom">
-                                <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
-                                <div className='col-3 pe-3'>
-                                    <Form.Group className="w-100" controlId="numberInput">
-                                        <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Porcentaje de descuento (sin %)" onChange={handleChange} />
-                                    </Form.Group>
-                                </div>
-                                <div className='col-9'>
-                                    <Form.Group className="w-100" controlId="paymentMethodInput">
-                                        <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Nombre del medio de pago" onChange={handleChange} />
-                                    </Form.Group>
-                                </div>
-                                </div>
-                            <div className='d-flex col-1 justify-content-end'>
-                                <button id={line.id} type="button" className='trash-button border-0 rounded p-1' onClick={(e) => removeLine(e)}><BsTrash style={{pointerEvents:'none'}}/></button>
-                            </div>
-                        </div>)
-                    }
+                        else {
+                            return (console.log("Is not a installment and not a discount"))
+                        }
 
-                    else {
-                        return (console.log("Is not a installment and not a discount"))
-                    }
-
-                })}
+                    })
+                }
                 <div className='d-flex w-100'>
                     <div className='col-6 pe-3'>
                         <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button shadow-sm w-100 ps-1 pe-1'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>

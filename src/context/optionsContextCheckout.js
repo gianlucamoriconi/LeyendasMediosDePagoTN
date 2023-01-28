@@ -22,14 +22,26 @@ export const OptionsCheckout = ({children}) => {
     const [custom_payment_cash_production, set_custom_payment_cash_production] = useState(initCustomCash);
     const [custom_payment_other_production, set_custom_payment_other_production] = useState(initCustomOther);
 
+    const [payments, setPayments] = useState({
+        mercadopago_transparent_card: initMercadopagoTransparente,
+        mercadopago_redirect: initMercadopagoRedirect,
+        mercadopago_transparent_offline: initMercadopagoOffline,
+        UALA_PROD: initUalaTransparente,
+        custom_payment_wire_transfer_production: initCustomWire,
+        custom_payment_cash_production: initCustomCash,
+        custom_payment_other_production: initCustomOther,
+    });
+    
+
+
     const totalSelectionCHO = [
-        mercadopago_transparent_card,
-        mercadopago_redirect,
-        mercadopago_transparent_offline,
-        UALA_PROD,
-        custom_payment_wire_transfer_production,
-        custom_payment_cash_production,
-        custom_payment_other_production
+        payments.mercadopago_transparent_card,
+        payments.mercadopago_redirect,
+        payments.mercadopago_transparent_offline,
+        payments.UALA_PROD,
+        payments.custom_payment_wire_transfer_production,
+        payments.custom_payment_cash_production,
+        payments.custom_payment_other_production
     ];
     
     const [paymentMethodsData, setPaymentMethodsData] = useState([
@@ -37,134 +49,64 @@ export const OptionsCheckout = ({children}) => {
             id: "mercadopago_transparent_card",
             paymentName: "Mercado Pago Transparente",
             img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
-            dataContext: mercadopago_transparent_card,
+            dataContext: payments.mercadopago_transparent_card,
             setValuePayment: set_mercadopago_transparent_card //REVISAR
         },
         {
             id: "mercadopago_redirect",
             paymentName: "Mercado Pago Redirect",
             img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
-            dataContext: mercadopago_redirect,
+            dataContext: payments.mercadopago_redirect,
             setValuePayment: set_mercadopago_redirect //REVISAR
         },
         {
             id: "mercadopago_transparent_offline",
             paymentName: "Mercado Pago Offline (Rapipago/Pagofácil)",
             img: null,
-            dataContext: mercadopago_transparent_offline,
+            dataContext: payments.mercadopago_transparent_offline,
             setValuePayment: set_mercadopago_transparent_offline //REVISAR
         },
         {
             id: "UALA_PROD",
             paymentName: "Ualá Transparente",
             img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logotipo_de_Ual%C3%A1.svg/2560px-Logotipo_de_Ual%C3%A1.svg.png",
-            dataContext: UALA_PROD,
+            dataContext: payments.UALA_PROD,
             setValuePayment: set_UALA_PROD, //REVISAR
         },
         {
             id: "custom_payment_wire_transfer_production",
             paymentName: "Transferencia bancaria (personalizado del admin)",
             img: null,
-            dataContext: custom_payment_wire_transfer_production,
+            dataContext: payments.custom_payment_wire_transfer_production,
             setValuePayment: set_custom_payment_wire_transfer_production //REVISAR
         },
         {
             id: "custom_payment_cash_production",
             paymentName: "Efectivo (personalizado del admin)",
             img: null,
-            dataContext: custom_payment_cash_production,
+            dataContext: payments.custom_payment_cash_production,
             setValuePayment: set_custom_payment_cash_production //REVISAR
         },
         {
             id: "custom_payment_other_production",
             paymentName: "A convenir (personalizado del admin)",
             img: null,
-            dataContext: custom_payment_other_production,
+            dataContext: payments.custom_payment_other_production,
             setValuePayment: set_custom_payment_cash_production //REVISAR
         },
     ]);
 
 
     const changeValueTextPayment = (paymentId, textEntry) => {
-
-        if (paymentId === 'mercadopago_transparent_card') {
-            mercadopago_transparent_card.text = textEntry;
-            set_mercadopago_transparent_card(mercadopago_transparent_card);
-            console.log(mercadopago_transparent_card.text);
-        }
-
-        else if (paymentId === 'mercadopago_redirect') {
-            mercadopago_redirect.text = textEntry;
-            set_mercadopago_redirect(mercadopago_redirect);
-            console.log(mercadopago_redirect.text);
-        }
-
-        else if (paymentId === 'mercadopago_transparent_offline') {
-            mercadopago_transparent_offline.text = textEntry;
-            set_mercadopago_transparent_offline(mercadopago_transparent_offline);
-            console.log(mercadopago_transparent_offline.text);
-        }
-
-        else if (paymentId === 'UALA_PROD') {
-            UALA_PROD.text = textEntry;
-            set_UALA_PROD(UALA_PROD);
-            console.log(UALA_PROD.text);
-        }
-
-        else if (paymentId === 'custom_payment_wire_transfer_production') {
-            custom_payment_wire_transfer_production.text = textEntry;
-            set_custom_payment_wire_transfer_production(custom_payment_wire_transfer_production);
-            console.log(custom_payment_wire_transfer_production.text);
-        }
-
-        else if (paymentId === 'custom_payment_cash_production') {
-            custom_payment_cash_production.text = textEntry;
-            set_custom_payment_cash_production(custom_payment_cash_production);
-            console.log(custom_payment_cash_production.text);
-        }
-
-        else if (paymentId === 'custom_payment_other_production') {
-            custom_payment_other_production.text = textEntry;
-            set_custom_payment_other_production(custom_payment_other_production);
-            console.log(custom_payment_other_production.text);
-        }
+        payments[paymentId].text = textEntry;
+        setPayments({...payments});
+        console.log(payments[paymentId].text);
     }
 
+
     const changeDisplayPayment = (paymentId, displaySet) => {
-        if (paymentId === 'mercadopago_transparent_card') {
-            mercadopago_transparent_card.display = displaySet;
-            set_mercadopago_transparent_card(mercadopago_transparent_card);
-        }
-
-        else if (paymentId === 'mercadopago_redirect') {
-            mercadopago_redirect.display = displaySet;
-            set_mercadopago_redirect(mercadopago_redirect);
-        }
-
-        else if (paymentId === 'mercadopago_transparent_offline') {
-            mercadopago_transparent_offline.display = displaySet;
-            set_mercadopago_transparent_offline(mercadopago_transparent_offline);
-        }
-
-        else if (paymentId === 'UALA_PROD') {
-            UALA_PROD.display = displaySet;
-            set_UALA_PROD(UALA_PROD)
-        }
-
-        else if (paymentId === 'custom_payment_wire_transfer_production') {
-            custom_payment_wire_transfer_production.display = displaySet;
-            set_custom_payment_wire_transfer_production(custom_payment_wire_transfer_production);
-        }
-
-        else if (paymentId === 'custom_payment_cash_production') {
-            custom_payment_cash_production.display = displaySet;
-            set_custom_payment_cash_production(custom_payment_cash_production);
-        }
-
-        else if (paymentId === 'custom_payment_other_production') {
-            custom_payment_other_production.display = displaySet;
-            set_custom_payment_other_production(custom_payment_other_production);
-        }
+        payments[paymentId].display = displaySet;
+        setPayments({...payments});
     }
 
 

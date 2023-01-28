@@ -9,77 +9,57 @@ import { OptionsContextObject } from '../../../context/optionsContextObject';
 
 const DetailMain = () => {
 
-  const {setModalMercadopago,
-    setModalMobbex,
-    setModalPagonube,
-    setModalModo,
-    setModalDlocal,
-    setModalGocuotas,
-    setModalUala,
-    modalMercadopago,
-    modalMobbex,
-    modalPagonube,
-    modalUala,
-    modalModo,
-    modalDlocal,
-    modalGocuotas
-  } = useContext(OptionsContextObject);
+
+  const { payments } = useContext(OptionsContextObject);
 
 
 
-  const payments = [
+  const paymentsData = [
       {
         paymentName: "Mercadopago",
         savedId: "modalMercadopago",
         idSelector: "#installment_mercadopago_",
-        modalValues: modalMercadopago,
-        setValues: setModalMercadopago
+        modalValues: payments.modalMercadopago
       },
       {
         paymentName: "Modo",
         savedId: "modalModo",
         idSelector: "#installment_modo_",
-        modalValues:modalModo,
-        setValues: setModalModo
+        modalValues: payments.modalModo
       },
       {
         paymentName: "Mobbex",
         savedId: "modalMobbex",
         idSelector: "#installment_mobbex_",
-        modalValues: modalMobbex,
-        setValues: setModalMobbex
+        modalValues: payments.modalMobbex
       },
       {
         paymentName: "Pagonube",
         savedId: "modalPagonube",
         idSelector: "#installment_pago_nube_",
-        modalValues: modalPagonube,
-        setValues: setModalPagonube
+        modalValues: payments.modalPagonube
       },
       {
         paymentName: "Uala",
         savedId: "modalUala",
         idSelector: "#installment_ualá_",
-        modalValues: modalUala,
-        setValues: setModalUala
+        modalValues: payments.modalUala
       },
       {
         paymentName: "Dlocal",
         savedId: "modalDlocal",
         idSelector: "#installment_dlocal_payments_",
-        modalValues: modalDlocal,
-        setValues: setModalDlocal
+        modalValues: payments.modalDlocal
       },
       {
         paymentName: "Gocuotas",
         savedId: "modalGocuotas",
         idSelector: "#installment_gocuotas_",
-        modalValues: modalGocuotas,
-        setValues: setModalGocuotas
+        modalValues: payments.modalGocuotas
       }
     ];
 
-    
+    console.log(payments.modalMercadopago);
 
     return (
       <>
@@ -87,8 +67,8 @@ const DetailMain = () => {
           <Description value="Activá y editá en los medios de pago que tenés activos en tu tienda. Las cuotas que se mostrarán serán sin interés."></Description>
           <div id="detailMainModal" className="container-lines-config">
             <FormGroup>
-            {payments.map((payment, i) =>{
-              return (<Switcher setValues={payment.setValues} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={payment.modalValues.length > 0 ? true : false} />)
+            {paymentsData.map((payment, i) =>{
+              return (<Switcher setValues={payment.setPayments} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={payment.modalValues.length > 0 ? true : false} />)
             })
             }
             </FormGroup>
