@@ -30,7 +30,7 @@ export const OptionsProvider = ({children}) => {
 
     //Dejamos solo los que tienen información
     const totalSelectionModalOptimized = () =>{
-        var totalSelectionModalOptimizedObject = [];
+        var totalSelectionModalOptimizedObject = {};
 
 
         Object.entries(payments).forEach(entry => {
@@ -40,19 +40,25 @@ export const OptionsProvider = ({children}) => {
             }
         });  
         
-        return Object.keys(totalSelectionModalOptimizedObject).length !== 0 ? totalSelectionModalOptimizedObject : [];
+        return Object.keys(totalSelectionModalOptimizedObject).length !== 0 ? totalSelectionModalOptimizedObject : null;
     }
     
     
 
+    // Construimos el objeto que contiene todas las ediciones que hace el usuario
+    var totalSelection = {};
+    
+    Object.entries(zonesInfo).forEach(entry => {
+        const [zone, value] = entry;
+        if (value.length > 0){
+            totalSelection[zone] = value;
+        }
+    });
 
-    const totalSelection = {
-        itemProducts: zonesInfo.itemProducts,
-        detailMain: zonesInfo.detailMain,
-        cart: zonesInfo.cart,
-        detailModalNew: totalSelectionModalOptimized(),
-        // detailModalOld: totalSelectionModal
-    };
+    if (totalSelectionModalOptimized() !== null) {
+        totalSelection.detailModalNew = totalSelectionModalOptimized();
+    }
+
 
 
     /* Handlers que construyen los objetos de:
@@ -63,13 +69,21 @@ export const OptionsProvider = ({children}) => {
         Los de detailModal son diferentes, están más abajo.
      */
     const handleAddLineInObject = (place, lineObject) =>{
-
+        console.log(lineObject);
         if (isInObject(place, lineObject) === true){
             zonesInfo[place].map((line) => {
                 if (line.id === lineObject.id){
-                  line.numberInput = lineObject.numberInput;
-                  line.paymentMethodInput = lineObject.paymentMethodInput;
-                  line.interest = lineObject.interest;
+
+                    line.paymentMethod = lineObject.paymentMethod;
+
+                    if (lineObject.typefield === "installments") {
+                        line.installments = lineObject.installments;
+                        line.interest = lineObject.interest;
+                    }
+
+                    else if (lineObject.typefield === "discount"){
+                        line.discountPercentage = lineObject.discountPercentage;
+                    }
                   
                   return setZonesInfo({...zonesInfo});
                 }
@@ -112,6 +126,7 @@ export const OptionsProvider = ({children}) => {
     /* Handlers que construye el objeto de detailModal:
         - handleAddBoxInObject
         - handleRemoveBoxInObject
+        - handleRemoveSwitcherOptions (remueve todas las opciones del modal)
     */
 
     const handleAddBoxInObject = (payment, boxObject) =>{
@@ -120,6 +135,7 @@ export const OptionsProvider = ({children}) => {
             payments[payment].map((box) => {
                 if (box.id === boxObject.id){
                     box.numberInstallment = boxObject.numberInstallment;
+                    box.interest = boxObject.interest;
                     setPayments({...payments});
                 }
               });
@@ -133,6 +149,11 @@ export const OptionsProvider = ({children}) => {
 
     const handleRemoveBoxInObject = (payment, boxObjectId) =>{
         payments[payment] = payments[payment].filter((item) => item.id !== boxObjectId)
+        setPayments({...payments});
+    }
+
+    const handleRemoveSwitcherOptions = (payment) =>{
+        payments[payment] = [];
         setPayments({...payments});
     }
 
@@ -155,6 +176,7 @@ export const OptionsProvider = ({children}) => {
             isInObject,
             handleAddBoxInObject,
             handleRemoveBoxInObject,
+            handleRemoveSwitcherOptions,
             totalSelection,
             totalSelectionModalOptimized,
             seeObject

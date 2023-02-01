@@ -20,30 +20,35 @@ const LinesForm = (props) => {
         place = place.getAttribute("id");
         const lineChangingId = e.target.closest(".line-config").getAttribute("id");
         const typefield = e.target.closest(".line-config").getAttribute("data-type");
-        const numberInput = e.target.closest(".line-config").querySelector("#numberInput").value;
-        const paymentMethodInput = e.target.closest(".line-config").querySelector("#paymentMethodInput").value;
+        const paymentMethod = e.target.closest(".line-config").querySelector("#paymentMethod").value;
 
         var lineObjectToAdd = {
             typefield: typefield || '',
             id: Number(lineChangingId) || '',
             place: place || '',
-            numberInput: Number(numberInput) || '',
-            paymentMethodInput: paymentMethodInput || '',
+            paymentMethod: paymentMethod || '',
         }
 
         if (typefield === "installments") {
             const interest = e.target.closest(".line-config").querySelector(".interest-select").value;
+            const installments = e.target.closest(".line-config").querySelector("#installments").value;
+
             lineObjectToAdd.interest = interest;
+            lineObjectToAdd.installments = installments;
+        }
+
+        else if (typefield === "discount") {
+            const numberInput = e.target.closest(".line-config").querySelector("#numberInput").value;
+            lineObjectToAdd.discountPercentage = numberInput;
         }
         
         return lineObjectToAdd;
     }
-
     
 
     const addNewLineInstallment = (e) =>{
-        let atributeOfContainerLine = e.target.closest(".container-lines-config");
-        atributeOfContainerLine = atributeOfContainerLine.getAttribute("id");
+        let place = e.target.closest(".container-lines-config");
+        place = place.getAttribute("id");
         var id = "";
         let idsArray = [];
         lines.map((line) =>(
@@ -60,7 +65,7 @@ const LinesForm = (props) => {
 
 
         const newLine = {
-            place: atributeOfContainerLine, 
+            place: place, 
             id: id, 
             typefield:"installments", 
             installments:"", 
@@ -92,7 +97,8 @@ const LinesForm = (props) => {
         const newLine = {
             id: id,
             typefield:"discount",
-            paymentMethod:""
+            paymentMethod:"",
+            discountPercentage: ""
         }
         setLines([...lines, newLine]);
         
@@ -122,8 +128,8 @@ const LinesForm = (props) => {
                                 <div key={line.id} id={line.id} data-type={line.typefield} className="d-flex line-config flex-wrap pb-3 mb-4 border-bottom">
                                     <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
                                         <div className='d-flex col-12 col-md-6 pb-2 pb-md-0 pe-md-3'>
-                                            <Form.Group className="w-100 pe-3" controlId="numberInput">
-                                                <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Número de cuota" onChange={handleChange} />
+                                            <Form.Group className="w-100 pe-3" controlId="installments">
+                                                <Form.Control value={line.installments > 0 ? line.installments : '' } data-id={line.id} type="number" required placeholder="Número de cuota" onChange={handleChange} />
                                             </Form.Group>
                                             <Form.Select className='interest-select w-100' aria-label='interest-select' onChange={handleChange}>
                                                 <option data-id={line.id} className='interest-option' value={false}>sin interés</option>
@@ -131,8 +137,8 @@ const LinesForm = (props) => {
                                             </Form.Select>
                                         </div>
                                         <div className='d-flex col-12 col-md-6'>
-                                            <Form.Group className="w-100" controlId="paymentMethodInput">
-                                                <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Medio de pago (opcional)" onChange={handleChange} />
+                                            <Form.Group className="w-100" controlId="paymentMethod">
+                                                <Form.Control value={line.paymentMethod || ''} data-id={line.id} type="text" required placeholder="Medio de pago (opcional)" onChange={handleChange} />
                                             </Form.Group>
                                         </div>
                                     </div>
@@ -149,12 +155,12 @@ const LinesForm = (props) => {
                                     <div className='d-flex col-11 flex-wrap pe-2 pe-md-0'>
                                     <div className='col-3 pe-3'>
                                         <Form.Group className="w-100" controlId="numberInput">
-                                            <Form.Control value={line.numberInput > 0 ? line.numberInput : '' } data-id={line.id} type="number" required placeholder="Porcentaje de descuento (sin %)" onChange={handleChange} />
+                                            <Form.Control value={line.discountPercentage > 0 ? line.discountPercentage : '' } data-id={line.id} type="number" required placeholder="Porcentaje de descuento (sin %)" onChange={handleChange} />
                                         </Form.Group>
                                     </div>
                                     <div className='col-9'>
-                                        <Form.Group className="w-100" controlId="paymentMethodInput">
-                                            <Form.Control value={line.paymentMethodInput || ''} data-id={line.id} type="text" required placeholder="Nombre del medio de pago" onChange={handleChange} />
+                                        <Form.Group className="w-100" controlId="paymentMethod">
+                                            <Form.Control value={line.paymentMethod || ''} data-id={line.id} type="text" required placeholder="Nombre del medio de pago" onChange={handleChange} />
                                         </Form.Group>
                                     </div>
                                     </div>

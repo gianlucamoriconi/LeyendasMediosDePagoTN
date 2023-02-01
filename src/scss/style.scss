@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 $primaryCustom: rgb(0, 242, 226);
 $primary: $primaryCustom;
@@ -106,7 +106,7 @@ html, body{
 
 
 h1, h2, h3, h4{
-font-family: 'Manrope', sans-serif;
+font-family: 'Urbanist', sans-serif;
   font-weight: 900;
 }
 
@@ -433,6 +433,10 @@ h3{
   font-size: calc(0.8rem + 0.6vw);
 }
 
+h4{
+  font-size: calc(0.7rem + 0.5vw);
+}
+
 .add-line-button{
   font-size: 14px;
 }
@@ -599,6 +603,9 @@ strong.main-title {
   background-color: #ffffff;
 }
 
+.payment-name-container{
+  font-size: 16px;
+}
 
 @media (max-width: 767px){
   .payment-name-container{
@@ -648,4 +655,9 @@ strong.main-title {
   &::placeholder{
     font-size: 13px;
   }
+}
+
+
+.container-lines-config input.form-control{
+  font-size: 14px;
 }

@@ -31,18 +31,27 @@ export const OptionsCheckout = ({children}) => {
         custom_payment_cash_production: initCustomCash,
         custom_payment_other_production: initCustomOther,
     });
-    
 
 
-    const totalSelectionCHO = [
-        payments.mercadopago_transparent_card,
-        payments.mercadopago_redirect,
-        payments.mercadopago_transparent_offline,
-        payments.UALA_PROD,
-        payments.custom_payment_wire_transfer_production,
-        payments.custom_payment_cash_production,
-        payments.custom_payment_other_production
-    ];
+    //Dejamos solo los que tienen información
+    const totalSelectionCHOOptimized = () =>{
+
+        var totalSelectionCHOOptimized= {};
+
+        Object.entries(payments).forEach(entry => {
+            const [payment, paymentObject] = entry;
+            if ((paymentObject.display === true ) && paymentObject.text !== null) {
+                totalSelectionCHOOptimized[payment] = paymentObject;
+            }
+
+        });  
+        
+        return totalSelectionCHOOptimized;
+    }
+
+
+    const totalSelectionCHO = totalSelectionCHOOptimized();
+
     
     const [paymentMethodsData, setPaymentMethodsData] = useState([
         {
@@ -127,6 +136,8 @@ export const OptionsCheckout = ({children}) => {
             set_custom_payment_cash_production,
             set_custom_payment_other_production,
             totalSelectionCHO,
+            totalSelectionCHOOptimized,
+            payments,
             paymentMethodsData,
             changeValueTextPayment,
             changeDisplayPayment

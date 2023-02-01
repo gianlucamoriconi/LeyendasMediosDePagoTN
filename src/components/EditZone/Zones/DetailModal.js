@@ -10,7 +10,7 @@ import { OptionsContextObject } from '../../../context/optionsContextObject';
 const DetailMain = () => {
 
 
-  const { payments } = useContext(OptionsContextObject);
+  const { payments, handleRemoveSwitcherOptions } = useContext(OptionsContextObject);
 
 
 
@@ -59,7 +59,6 @@ const DetailMain = () => {
       }
     ];
 
-    console.log(payments.modalMercadopago);
 
     return (
       <>
@@ -68,7 +67,7 @@ const DetailMain = () => {
           <div id="detailMainModal" className="container-lines-config">
             <FormGroup>
             {paymentsData.map((payment, i) =>{
-              return (<Switcher setValues={payment.setPayments} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={payment.modalValues.length > 0 ? true : false} />)
+              return (<Switcher handleRemoveSwitcherOptions={handleRemoveSwitcherOptions} key={i} savedId={payment.savedId} idSelector={payment.idSelector} labelName={payment.paymentName} defaultCheckedValue={payment.modalValues.length > 0 ? true : false} />)
             })
             }
             </FormGroup>

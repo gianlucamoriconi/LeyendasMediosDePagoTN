@@ -8,7 +8,7 @@ import SwitcherBox from '../../resources/SwitcherBox';
 
 const EditCheckout = () => {
 
-    const { paymentMethodsData, changeValueTextPayment, changeDisplayPayment } = useContext(OptionsContextCheckout);
+    const { paymentMethodsData, changeValueTextPayment, changeDisplayPayment, payments } = useContext(OptionsContextCheckout);
 
 
     return (

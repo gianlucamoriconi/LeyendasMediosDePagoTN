@@ -1,5 +1,5 @@
 
-import { Amazonas, Simple, Trend, Idea, Atlantico, Silent, Lifestyle, Material } from './scriptsByTheme/allThemes';
+import { AmazonasSolid, AmazonasLight, Simple, Trend, Idea, Atlantico, Silent, Lifestyle, Material, Rio } from './scriptsByTheme/allThemes';
 
 
 const ThemeTemplate = (props) => {
@@ -8,8 +8,12 @@ const ThemeTemplate = (props) => {
 
     const { theme } = props; 
 
-    if (theme === "amazonas"){
-        return <Amazonas/>
+    if (theme === "amazonas-solid"){
+        return <AmazonasSolid/>
+    }
+
+    else if (theme === "amazonas-light"){
+        return <AmazonasLight/>
     }
 
     else if(theme === "idea"){
@@ -38,6 +42,10 @@ const ThemeTemplate = (props) => {
 
     else if(theme === "material"){
         return <Material/>
+    }
+
+    else if(theme === "rio"){
+        return <Rio/>
     }
 
 }

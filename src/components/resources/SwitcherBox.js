@@ -40,12 +40,12 @@ const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) =>
     }
 
     return(
-    <div key={content.id} id={content.id} className='payment-method d-flex flex-wrap w-100 p-3 mb-4 shadow-sm border rounded'>
+    <div key={content.id} id={content.id} className='payment-method d-flex flex-wrap w-100 p-3 mb-4 shadow-sm rounded'>
         <div className='payment-header d-flex w-100 justify-content-between'>
             <div className='payment-title-container d-flex'>
-                <div className='payment-name-container'>
+                <h4 className='payment-name-container'>
                     {content.paymentName}
-                </div>
+                </h4>
                 {content.img !== null ?
                 <div className='payment-img-container'>
                     <img className='payment-img ms-3' alt={'Logo de ' + content.paymentName} src={content.img}/>

@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 
 
 const DetailOptionEditor = (props) => {
-    const { paymentTab, savedId, idSelector } = props;
+    const { paymentTab, savedId, idSelector, switcherOnOff } = props;
     const [boxesInDetail, setBoxesInDetail] = useState([]);
 
     const { payments, handleAddBoxInObject, handleRemoveBoxInObject } = useContext(OptionsContextObject);
@@ -34,7 +34,8 @@ const DetailOptionEditor = (props) => {
             id: id,
             savedId: savedId,
             numberInstallment:"",
-            idSelector: idSelector
+            idSelector: idSelector,
+            interest: false
         }
 
         setBoxesInDetail([...boxesInDetail, newBox]);

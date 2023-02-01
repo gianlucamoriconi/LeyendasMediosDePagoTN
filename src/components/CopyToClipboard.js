@@ -29,7 +29,6 @@ const CopyToClipboard = () =>{
 
         textToCopy = textToCopy.previousSibling.textContent;
         navigator.clipboard.writeText(textToCopy);
-        console.log(textToCopy);
         setCopyIcon(<HiOutlineClipboardDocumentCheck/>);
 
         setTimeout( ()=> {

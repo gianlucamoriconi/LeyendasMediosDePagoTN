@@ -44,17 +44,22 @@ const SwitcherControl = styled(Switch)(({ theme }) => ({
 
 
 const Switcher = (props) => {
-    const { setValues, labelName, defaultCheckedValue, savedId, idSelector } = props;
+    const { handleRemoveSwitcherOptions, labelName, defaultCheckedValue, savedId, idSelector } = props;
     const [switcherDefault, setSwitcherDefault]= useState(defaultCheckedValue);
     const [switcherOnOff, setSwitcherOnOff]= useState(defaultCheckedValue);
 
     const contentShowOrHide = (e) =>{
         if (switcherOnOff === true){
+          //Apagar (setear false)
           setSwitcherOnOff(false);
+
+          //Borrar info, así el objeto que se utiliza para armar el script no queda con info del modal apagado.
+          handleRemoveSwitcherOptions(savedId);
         }
 
         else{
-          setSwitcherOnOff(true)
+          //Prender (setear true)
+          setSwitcherOnOff(true);
         }
     };
 
@@ -71,7 +76,7 @@ const Switcher = (props) => {
         />
         <div id={savedId} className={switcherOnOff === true ? "d-block content mb-4" : "d-none content"}>
             Contenido {labelName}
-            <DetailOptionEditor paymentTab={labelName} savedId={savedId} idSelector={idSelector}/>
+            <DetailOptionEditor paymentTab={labelName} savedId={savedId} idSelector={idSelector} switcherOnOff={switcherOnOff}/>
         </div>
     </>
 
