@@ -11,7 +11,13 @@ import PaymentChoContent from '../resources/PaymentChoContent';
 
 const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) => {
 
-    const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);  
+    const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);
+
+
+    content.img.forEach(url => {
+        console.log(url);
+
+    });
 
     const contentShowOrHide = (e) =>{
         if (switcherDisplay === true){
@@ -46,11 +52,14 @@ const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) =>
                 <h4 className='payment-name-container'>
                     {content.paymentName}
                 </h4>
-                {content.img !== null ?
-                <div className='payment-img-container'>
-                    <img className='payment-img ms-3' alt={'Logo de ' + content.paymentName} src={content.img}/>
-                </div>
-                : null
+                {content.img.length > 0 ?
+                    <div className='payment-img-container d-flex'>
+                        {content.img.map((url) =>{
+                            return <img className='payment-img ms-3' alt={'Logo de ' + content.paymentName} src={url}/>
+                        })}
+                    </div>
+                : 
+                    null
                 }
             </div>
             <div className='payment-switch-container'>

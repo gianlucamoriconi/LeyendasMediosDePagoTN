@@ -613,10 +613,12 @@ strong.main-title {
   }
 }
 
-
 .payment-img {
-  width: 53px;
+  max-width: 53px;
   height: auto;
+  max-height: 30px;
+  object-fit: contain;
+  width: 100%;
 }
 
 .payment-method{

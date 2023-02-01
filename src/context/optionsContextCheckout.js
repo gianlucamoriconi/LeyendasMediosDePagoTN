@@ -57,49 +57,49 @@ export const OptionsCheckout = ({children}) => {
         {
             id: "mercadopago_transparent_card",
             paymentName: "Mercado Pago Transparente",
-            img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
+            img: ["https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg"],
             dataContext: payments.mercadopago_transparent_card,
             setValuePayment: set_mercadopago_transparent_card //REVISAR
         },
         {
             id: "mercadopago_redirect",
             paymentName: "Mercado Pago Redirect",
-            img: "https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg",
+            img: ["https://checkout-security.ms.tiendanube.com/img/brands/original/mercadopago.svg"],
             dataContext: payments.mercadopago_redirect,
             setValuePayment: set_mercadopago_redirect //REVISAR
         },
         {
             id: "mercadopago_transparent_offline",
             paymentName: "Mercado Pago Offline (Rapipago/Pagofácil)",
-            img: null,
+            img: ["https://seeklogo.com/images/P/pago-facil-2019-logo-8BE6DD28D6-seeklogo.com.png", "https://searchvectorlogo.com/wp-content/uploads/2020/03/rapipago-logo-vector.png"],
             dataContext: payments.mercadopago_transparent_offline,
             setValuePayment: set_mercadopago_transparent_offline //REVISAR
         },
         {
             id: "UALA_PROD",
             paymentName: "Ualá Transparente",
-            img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logotipo_de_Ual%C3%A1.svg/2560px-Logotipo_de_Ual%C3%A1.svg.png",
+            img: ["https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Logotipo_de_Ual%C3%A1.svg/2560px-Logotipo_de_Ual%C3%A1.svg.png"],
             dataContext: payments.UALA_PROD,
             setValuePayment: set_UALA_PROD, //REVISAR
         },
         {
             id: "custom_payment_wire_transfer_production",
             paymentName: "Transferencia bancaria (personalizado del admin)",
-            img: null,
+            img: [],
             dataContext: payments.custom_payment_wire_transfer_production,
             setValuePayment: set_custom_payment_wire_transfer_production //REVISAR
         },
         {
             id: "custom_payment_cash_production",
             paymentName: "Efectivo (personalizado del admin)",
-            img: null,
+            img: [],
             dataContext: payments.custom_payment_cash_production,
             setValuePayment: set_custom_payment_cash_production //REVISAR
         },
         {
             id: "custom_payment_other_production",
             paymentName: "A convenir (personalizado del admin)",
-            img: null,
+            img: [],
             dataContext: payments.custom_payment_other_production,
             setValuePayment: set_custom_payment_cash_production //REVISAR
         },
