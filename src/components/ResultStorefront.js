@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 
 const Result = () => {
-    const [themeSelection, setThemeSelection] = useState('');
+    const [themeSelection, setThemeSelection] = useState('amazonas-light');
     const [title, setTitle] = useState('No detectamos que hayas elegido hacer cambios');
     const [selectionIsEmpty, setSelectionIsEmpty] = useState(true)
     const { totalSelection } = useContext(OptionsContextObject);

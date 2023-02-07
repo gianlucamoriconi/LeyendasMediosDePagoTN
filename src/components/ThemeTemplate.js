@@ -4,8 +4,6 @@ import { AmazonasSolid, AmazonasLight, Simple, Trend, Idea, Atlantico, Silent, L
 
 const ThemeTemplate = (props) => {
 
-    // const themesDB = ["amazonas", "simple", "idea", "atlantico", "silent", "lifestyle", "material"];
-
     const { theme } = props; 
 
     if (theme === "amazonas-solid"){

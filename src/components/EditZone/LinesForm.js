@@ -178,10 +178,10 @@ const LinesForm = (props) => {
                 }
                 <div className='d-flex w-100'>
                     <div className='col-6 pe-3'>
-                        <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button shadow-sm w-100 ps-1 pe-1'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
+                        <button onClick={(e) => addNewLineInstallment(e)} className='btn btn-primary add-line-button shadow-sm w-100 ps-1 pe-1 border-0'><IoIosAddCircleOutline className="add-circle"/>Cuotas sin interés</button>
                     </div>
                     <div className='col-6'>
-                        <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button shadow-sm w-100 ps-1 pe-1'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
+                        <button onClick={(e) => addNewLineDiscount(e)} className='btn btn-primary add-line-button shadow-sm w-100 ps-1 pe-1 border-0'><IoIosAddCircleOutline className="add-circle"/>Descuento</button>
                     </div>
                 </div>
 

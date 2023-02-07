@@ -136,6 +136,7 @@ export const OptionsProvider = ({children}) => {
                 if (box.id === boxObject.id){
                     box.numberInstallment = boxObject.numberInstallment;
                     box.interest = boxObject.interest;
+                    box.images = boxObject.images;
                     setPayments({...payments});
                 }
               });
