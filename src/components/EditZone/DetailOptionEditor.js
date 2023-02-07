@@ -1,14 +1,13 @@
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { BsTrash } from 'react-icons/bs';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import { useState, useContext } from 'react';
 import { OptionsContextObject } from '../../context/optionsContextObject';
 import Form from 'react-bootstrap/Form';
 import {imagesPaymentOptions} from '../../payments/imagesPaymentOptions';
 
 const DetailOptionEditor = (props) => {
-    const { paymentTab, savedId, idSelector, switcherOnOff } = props;
+    const { savedId, idSelector } = props;
     const [boxesInDetail, setBoxesInDetail] = useState([]);
 
     const { payments, handleAddBoxInObject, handleRemoveBoxInObject } = useContext(OptionsContextObject);

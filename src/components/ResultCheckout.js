@@ -1,6 +1,5 @@
 import Footer from './Footer';
 import CopyToClipboard from './CopyToClipboard';
-import Menu from './Menu';
 import { useContext, useState, useEffect } from 'react';
 import { OptionsContextCheckout } from '../context/optionsContextCheckout';
 import { Link } from "react-router-dom";

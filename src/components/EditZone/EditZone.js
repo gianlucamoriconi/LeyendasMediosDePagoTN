@@ -6,24 +6,23 @@ import EditCheckout from './Zones/EditCheckout';
 import Cart from './Zones/Cart';
 import { Link } from "react-router-dom";
 import { OptionsContextObject } from '../../context/optionsContextObject';
-import { useState, useContext } from 'react';
-import Form from 'react-bootstrap/Form';
-
+import { useContext } from 'react';
 
 
 const EditZone = ({zone, handleEditZoneSelected}) => {
 
-    const [validated, setValidated] = useState(false);
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+    // const [validated, setValidated] = useState(false);
+    
+    // const handleSubmit = (event) => {
+    //     const form = event.currentTarget;
+    //     if (form.checkValidity() === false) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //     }
 
-        setValidated(true);
-    };
-    const { seeObject, totalSelectionModalOptimized, totalSelection } = useContext(OptionsContextObject);
+    //     setValidated(true);
+    // };
+    const { totalSelection } = useContext(OptionsContextObject);
     
     const verInfoTotal = () => {
         console.log(totalSelection);

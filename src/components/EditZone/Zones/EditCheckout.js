@@ -1,6 +1,6 @@
 import Title from './Title';
 import { Link } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { OptionsContextCheckout } from '../../../context/optionsContextCheckout';
 import SwitcherBox from '../../resources/SwitcherBox';
 
@@ -8,7 +8,7 @@ import SwitcherBox from '../../resources/SwitcherBox';
 
 const EditCheckout = () => {
 
-    const { paymentMethodsData, changeValueTextPayment, changeDisplayPayment, payments } = useContext(OptionsContextCheckout);
+    const { paymentMethodsData, changeValueTextPayment, changeDisplayPayment } = useContext(OptionsContextCheckout);
 
 
     return (

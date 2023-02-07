@@ -1,9 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
-import { useState } from "react";
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { useContext } from 'react';
-import { OptionsContextCheckout } from '../../context/optionsContextCheckout';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -58,20 +55,6 @@ const IOSSwitch = styled((props) => (
 
 
 const IOSSwitcher = ({object, onOff}) => {
-
-  const { 
-    mercadopago_transparent_card,
-    mercadopago_redirect,
-    mercadopago_transparent_offline,
-    UALA_PROD,
-    custom_payment_wire_transfer_production,
-    custom_payment_cash_production,
-    custom_payment_other_production
-  } = useContext(OptionsContextCheckout);
-
-  
-  
-
 
   return(
   <>

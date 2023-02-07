@@ -1,7 +1,7 @@
 
 import { BiCopy } from 'react-icons/bi';
 import { HiOutlineClipboardDocumentCheck } from 'react-icons/hi2';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 const CopyToClipboard = () =>{

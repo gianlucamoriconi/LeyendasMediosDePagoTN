@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 
 export const OptionsContextCheckout = createContext();
@@ -117,7 +117,6 @@ export const OptionsCheckout = ({children}) => {
         payments[paymentId].display = displaySet;
         setPayments({...payments});
     }
-
 
     return (
         <OptionsContextCheckout.Provider value={{

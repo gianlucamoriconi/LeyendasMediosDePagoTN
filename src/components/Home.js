@@ -1,10 +1,7 @@
-// import { Link } from 'react-router-dom';
 import Footer from './Footer';
-import BottomMenu from './BottomMenu';
-import Menu from './Menu';
 import Presentation from './Presentation';
 import EditZone from './EditZone/EditZone';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { OptionZoneContext } from '../context/optionZoneContext';
 
 
