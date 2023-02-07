@@ -3,7 +3,7 @@ import CopyToClipboard from './CopyToClipboard';
 import { useContext, useState, useEffect } from 'react';
 import { OptionsContextCheckout } from '../context/optionsContextCheckout';
 import { Link } from "react-router-dom";
-import PaymentBenefitScript from './scriptsCheckout/PaymentBenefit';
+import PaymentBenefitScript from './scriptsCheckout/PaymentBenefitScript';
 
 
 const ResultCheckout = () => {
