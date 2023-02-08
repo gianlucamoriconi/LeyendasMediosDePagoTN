@@ -7,6 +7,10 @@ const initMercadopagoTransparente = JSON.parse(localStorage.getItem('mercadopago
 const initMercadopagoRedirect = JSON.parse(localStorage.getItem('mercadopagoRedirectCHO')) || {id: "mercadopago_redirect", display: false, text: null};
 const initMercadopagoOffline = JSON.parse(localStorage.getItem('mercadopagoOfflineCHO')) || {id: "mercadopago_transparent_offline", display: false, text: null};
 const initUalaTransparente = JSON.parse(localStorage.getItem('ualaTransparenteCHO')) || {id: "UALA_PROD", display: false, text: null};
+const initGetnetTransparente = JSON.parse(localStorage.getItem('getnetTransparenteCHO')) || {id: "GETNET_PROD", display: false, text: null};
+const initNuvempago = JSON.parse(localStorage.getItem('nuvemPagoCHO')) || {id: "nuvempago_transparent_card", display: false, text: null};
+const initModoModal = JSON.parse(localStorage.getItem('modoModalCHO')) || {id: "modo_modal", display: false, text: null};
+const initModoRedirect = JSON.parse(localStorage.getItem('modoRedirectCHO')) || {id: "modo_redirect", display: false, text: null};
 const initCustomWire = JSON.parse(localStorage.getItem('customWireCHO')) || {id: "custom_payment_wire_transfer_production", display: false, text: null};
 const initCustomCash = JSON.parse(localStorage.getItem('customCashCHO')) || {id: "custom_payment_cash_production", display: false, text: null};
 const initCustomOther = JSON.parse(localStorage.getItem('customOtherCHO')) || {id: "custom_payment_other_production", display: false, text: null};
@@ -18,6 +22,10 @@ export const OptionsCheckout = ({children}) => {
     const [mercadopago_redirect, set_mercadopago_redirect] = useState(initMercadopagoRedirect);
     const [mercadopago_transparent_offline, set_mercadopago_transparent_offline] = useState(initMercadopagoOffline);
     const [UALA_PROD, set_UALA_PROD] = useState(initUalaTransparente);
+    const [GETNET_PROD, set_GETNET_PROD] = useState(initGetnetTransparente);
+    const [nuvempago_transparent_card, set_nuvempago_transparent_card] = useState(initNuvempago);
+    const [modo_redirect, setModoRedirect] = useState(initModoRedirect);
+    const [modo_modal, setModoModal] = useState(initModoModal);
     const [custom_payment_wire_transfer_production, set_custom_payment_wire_transfer_production] = useState(initCustomWire);
     const [custom_payment_cash_production, set_custom_payment_cash_production] = useState(initCustomCash);
     const [custom_payment_other_production, set_custom_payment_other_production] = useState(initCustomOther);
@@ -27,6 +35,10 @@ export const OptionsCheckout = ({children}) => {
         mercadopago_redirect: initMercadopagoRedirect,
         mercadopago_transparent_offline: initMercadopagoOffline,
         UALA_PROD: initUalaTransparente,
+        modo_redirect: initModoRedirect,
+        modo_modal: initModoModal,
+        GETNET_PROD: initGetnetTransparente,
+        nuvempago_transparent_card: initNuvempago,
         custom_payment_wire_transfer_production: initCustomWire,
         custom_payment_cash_production: initCustomCash,
         custom_payment_other_production: initCustomOther,
@@ -83,6 +95,34 @@ export const OptionsCheckout = ({children}) => {
             setValuePayment: set_UALA_PROD, //REVISAR
         },
         {
+            id: "GETNET_PROD",
+            paymentName: "Getnet Transparente",
+            img: ["https://placetopay-static-prod-bucket.s3.us-east-2.amazonaws.com/getnet-cl/microsites/images/IUiurDL047GLr2Nnu39sZPOum7PzgiAgyEocYzxx.png"],
+            dataContext: payments.GETNET_PROD,
+            setValuePayment: set_GETNET_PROD //REVISAR
+        },
+        {
+            id: "nuvempago_transparent_card",
+            paymentName: "Nuvempago / Pagonube",
+            img: [],
+            dataContext: payments.nuvempago_transparent_card,
+            setValuePayment: set_nuvempago_transparent_card
+        },
+        {
+            id: "modo_redirect",
+            paymentName: "MODO Redirect",
+            img: ["https://ecommerce.modo.com.ar/modo-400.png"],
+            dataContext: payments.modo_redirect,
+            setValuePayment: setModoRedirect
+        },
+        {
+            id: "modo_modal",
+            paymentName: "MODO Modal",
+            img: ["https://ecommerce.modo.com.ar/modo-400.png"],
+            dataContext: payments.modo_modal,
+            setValuePayment: setModoModal
+        },
+        {
             id: "custom_payment_wire_transfer_production",
             paymentName: "Transferencia bancaria (personalizado del admin)",
             img: [],
@@ -102,7 +142,7 @@ export const OptionsCheckout = ({children}) => {
             img: [],
             dataContext: payments.custom_payment_other_production,
             setValuePayment: set_custom_payment_cash_production //REVISAR
-        },
+        }
     ]);
 
 
@@ -124,6 +164,10 @@ export const OptionsCheckout = ({children}) => {
             mercadopago_redirect,
             mercadopago_transparent_offline,
             UALA_PROD,
+            GETNET_PROD,
+            nuvempago_transparent_card,
+            modo_redirect,
+            modo_modal,
             custom_payment_wire_transfer_production,
             custom_payment_cash_production,
             custom_payment_other_production,

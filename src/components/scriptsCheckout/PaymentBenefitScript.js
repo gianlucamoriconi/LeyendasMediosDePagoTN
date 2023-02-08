@@ -7,7 +7,6 @@ const PaymentBenefitScript = ({object}) => {
         var sdkLines = ``;
         Object.entries(object).forEach(entry => {
             const [payment, paymentObject] = entry;
-    
             sdkLines = sdkLines + '\n' + `window.SDKCheckout.changePaymentBenefit({ id: '${payment}', value: '${paymentObject.text}' });`;
         });
 
