@@ -96,22 +96,22 @@ const AmazonasSolid = () => {
                 $(opcionesElegidasParsed.itemProducts).each(function(){
             
                     if ($(this)[0].typefield === "installments") {
-                    let numeroDeCuota = $(this)[0].installments;
-                    let valorDeCuota = (price/numeroDeCuota).toFixed(2);
-                    valorDeCuota = formatterAR.format(valorDeCuota);
-                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">'+ valorDeCuota +'</span></span></span></div>';
-            
-                    item.find(".item-description").append(cuotaCustomItem);
+                        let numeroDeCuota = $(this)[0].installments;
+                        let valorDeCuota = (price/numeroDeCuota).toFixed(2);
+                        valorDeCuota = formatterAR.format(valorDeCuota);
+                        const cuotaCustomItem = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">$'+ valorDeCuota +'</span></span></span>';
+                
+                        item.find(".item-description").append(cuotaCustomItem);
                     }
             
                     if ($(this)[0].typefield === "discount") {
-                    let numeroDeDescuento = $(this)[0].discountPercentage;
-                    let paymentMethod = $(this)[0].paymentMethod;
-                    let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
-                    precioConDescuento = formatterAR.format(precioConDescuento);
-                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">'+ paymentMethod +'</span></span></span></div>';
-            
-                    item.find(".item-description").append(cuotaCustomItem);
+                        let numeroDeDescuento = $(this)[0].discountPercentage;
+                        let paymentMethod = $(this)[0].paymentMethod;
+                        let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
+                        precioConDescuento = formatterAR.format(precioConDescuento);
+                        const cuotaCustomItem = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">$'+ paymentMethod +'</span></span></span>';
+                
+                        item.find(".item-description").append(cuotaCustomItem);
                     }
             
                 });
@@ -433,22 +433,22 @@ const AmazonasLight = () => {
                 $(opcionesElegidasParsed.itemProducts).each(function(){
             
                     if ($(this)[0].typefield === "installments") {
-                    let numeroDeCuota = $(this)[0].installments;
-                    let valorDeCuota = (price/numeroDeCuota).toFixed(2);
-                    valorDeCuota = formatterAR.format(valorDeCuota);
-                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">'+ valorDeCuota +'</span></span></span></div>';
+                        let numeroDeCuota = $(this)[0].installments;
+                        let valorDeCuota = (price/numeroDeCuota).toFixed(2);
+                        valorDeCuota = formatterAR.format(valorDeCuota);
+                        const cuotaCustomItem = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">$'+ valorDeCuota +'</span></span></span>';
             
-                    item.find(".item-description").append(cuotaCustomItem);
+                        item.find(".item-description").append(cuotaCustomItem);
                     }
             
                     if ($(this)[0].typefield === "discount") {
-                    let numeroDeDescuento = $(this)[0].discountPercentage;
-                    let paymentMethod = $(this)[0].paymentMethod;
-                    let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
-                    precioConDescuento = formatterAR.format(precioConDescuento);
-                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">'+ paymentMethod +'</span></span></span></div>';
-            
-                    item.find(".item-description").append(cuotaCustomItem);
+                        let numeroDeDescuento = $(this)[0].discountPercentage;
+                        let paymentMethod = $(this)[0].paymentMethod;
+                        let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
+                        precioConDescuento = formatterAR.format(precioConDescuento);
+                        const cuotaCustomItem = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">$'+ paymentMethod +'</span></span></span>';
+                
+                        item.find(".item-description").append(cuotaCustomItem);
                     }
             
                 });
