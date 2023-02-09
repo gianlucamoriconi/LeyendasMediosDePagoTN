@@ -1,39 +1,43 @@
+/*
+    Este será el objeto final que verá la página Resultado Checkout.
+    Lo armamos solo con los textos y el id que es lo necesario para el script,
+    solo contendrán aquellos medios de pago que dejaron activados en la edición.
+*/
+
 const PaymentBenefitScript = ({object}) => {
 
     console.log(object);
 
 
     const sdkLines = () =>{
-        var sdkLines = ``;
+        var sdkLines = "";
         Object.entries(object).forEach(entry => {
             const [payment, paymentObject] = entry;
-            sdkLines = sdkLines + '\n' + `window.SDKCheckout.changePaymentBenefit({ id: '${payment}', value: '${paymentObject.text}' });`;
+            sdkLines = '\n' + 'window.SDKCheckout.changePaymentBenefit({ id: '+ payment +', value: "'+ paymentObject.text +'" });';
         });
 
         return sdkLines;
-    }  
-    /*
-        Este será el objeto final que verá la página Resultado Checkout.
-        Lo armamos solo con los textos y el id que es lo necesario para el script,
-        solo contendrán aquellos medios de pago que dejaron activados en la edición.
-    */
+    }
+
+
+    const currentDate = new Date(Date.now()).toLocaleDateString();
 
 
     return (`<!-- Inicio de: APP LEYENDAS - cambiar leyenda promocional medios de pago -->
-    <script>
+<script>
+  //Fecha de creación: ${currentDate}
+
+  function cambiarLeyendasMediosDePago(){
+    setTimeout(function(){
+${sdkLines()}
+    },200);
+  }
     
-      function cambiarLeyendasMediosDePago(){
-        setTimeout(function(){
-            ${sdkLines()}
-            
-        },200);
-      }
-    
-    if (window.location.href.indexOf("/next/") > -1) {
-      window.onload = cambiarLeyendasMediosDePago();
-    }
-    </script>
-    <!-- Fin de: APP LEYENDAS - cambiar leyenda promocional medios de pago -->
+  if (window.location.href.indexOf("/next/") > -1) {
+    window.onload = cambiarLeyendasMediosDePago();
+  }
+</script>
+<!-- Fin de: APP LEYENDAS - cambiar leyenda promocional medios de pago -->
     `)
 }
 

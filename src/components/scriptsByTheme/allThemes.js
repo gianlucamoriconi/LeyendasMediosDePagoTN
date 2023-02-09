@@ -976,12 +976,9 @@ const Simple = () => {
     $(document).ready(function(){
         if (LS.product) {
             setTimeout(function (){
-                
-                //Leyenda principal
                 ${detailMainExecution1}
                 ${detailMainExecution2}
 
-                //Modal
                 ${detailModalExecution1}
                 ${detailModalExecution2}
             })
