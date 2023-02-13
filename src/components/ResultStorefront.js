@@ -69,6 +69,7 @@ const Result = () => {
                                 <FormControlLabel value="amazonas-solid" control={<Radio />} label="Amazonas (íconos gruesos)" />
                                 <FormControlLabel value="atlantico" control={<Radio />} label="Atlántico" />
                                 <FormControlLabel value="idea" control={<Radio />} label="Idea" />
+                                <FormControlLabel value="bahia" control={<Radio />} label="Bahía" />
                                 <FormControlLabel value="lifestyle" control={<Radio />} label="Lifestyle" />
                                 <FormControlLabel value="material" control={<Radio />} label="Material" />
                                 <FormControlLabel value="silent" control={<Radio />} label="Silent" />
@@ -81,7 +82,7 @@ const Result = () => {
                 <div className='w-100 background-grey p-3 max-width-900'>
                     <div className='position-relative'>
                         <pre className="text-to-copy"> 
-                        {<ThemeTemplate theme={themeSelection}/>}
+                        {<ThemeTemplate theme={themeSelection} totalSelection={totalSelection}/>}
                         </pre>
                         <CopyToClipboard/>
                     </div>

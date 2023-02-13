@@ -1,49 +1,63 @@
 
-import { AmazonasSolid, AmazonasLight, Simple, Trend, Idea, Atlantico, Silent, Lifestyle, Material, Rio } from './scriptsByTheme/allThemes';
+import AmazonasSolid from './scriptsByTheme/AmazonasSolid';
+import AmazonasLight from './scriptsByTheme/AmazonasLight';
+import Simple from './scriptsByTheme/Simple';
+import Idea from './scriptsByTheme/Idea';
+import Bahia from './scriptsByTheme/Bahia';
+import Atlantico from './scriptsByTheme/Atlantico';
+import Trend from './scriptsByTheme/Trend';
+import Lifestyle from './scriptsByTheme/Lifestyle';
+import Material from './scriptsByTheme/Material';
+import Silent from './scriptsByTheme/Silent';
+import Rio from './scriptsByTheme/Rio';
 
 
 const ThemeTemplate = (props) => {
 
-    const { theme } = props; 
+    const { theme, totalSelection } = props; 
 
     if (theme === "amazonas-solid"){
-        return <AmazonasSolid/>
+        return <AmazonasSolid totalSelection={totalSelection}/>
     }
 
     else if (theme === "amazonas-light"){
-        return <AmazonasLight/>
+        return <AmazonasLight totalSelection={totalSelection}/>
     }
 
     else if(theme === "idea"){
-        return <Idea/>
+        return <Idea totalSelection={totalSelection}/>
     }
 
     else if(theme === "simple"){
-        return <Simple/>
+        return <Simple totalSelection={totalSelection}/>
     }
 
     else if(theme === "atlantico"){
-        return <Atlantico/>
+        return <Atlantico totalSelection={totalSelection}/>
     }
 
     else if(theme === "silent"){
-        return <Silent/>
+        return <Silent totalSelection={totalSelection}/>
     }
 
     else if(theme === "lifestyle"){
-        return <Lifestyle/>
+        return <Lifestyle totalSelection={totalSelection}/>
     }
 
     else if(theme === "trend"){
-        return <Trend/>
+        return <Trend totalSelection={totalSelection}/>
     }
 
     else if(theme === "material"){
-        return <Material/>
+        return <Material totalSelection={totalSelection}/>
     }
 
     else if(theme === "rio"){
-        return <Rio/>
+        return <Rio totalSelection={totalSelection}/>
+    }
+
+    else if(theme === "bahia"){
+        return <Bahia totalSelection={totalSelection}/>
     }
 
 }

@@ -4,24 +4,19 @@ import DetailMain from './Zones/DetailMain';
 import DetailModal from './Zones/DetailModal';
 import EditCheckout from './Zones/EditCheckout';
 import Cart from './Zones/Cart';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OptionsContextObject } from '../../context/optionsContextObject';
-import { useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
+import ReportAndSeeCode from '../resources/ModalReport';
+
+
 
 
 const EditZone = ({zone, handleEditZoneSelected}) => {
+    const navigate = useNavigate();
+    const goToCode = useCallback(() => navigate(`/result-storefront` , {replace: true}), [navigate]);
 
-    // const [validated, setValidated] = useState(false);
-    
-    // const handleSubmit = (event) => {
-    //     const form = event.currentTarget;
-    //     if (form.checkValidity() === false) {
-    //         event.preventDefault();
-    //         event.stopPropagation();
-    //     }
 
-    //     setValidated(true);
-    // };
     const { totalSelection } = useContext(OptionsContextObject);
     
     const verInfoTotal = () => {
@@ -46,14 +41,18 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
                     <Box component={<Cart/>}/>
                     <Box component={<DetailModal/>}/>          
                     <button onClick={verInfoTotal}>Ver objeto en consola</button>
-                    <Link type="submit" to="/result-storefront" className="btn btn-primary font-monospace fs-6 ms-4">&#60; Ver código &#62;</Link>
-
+                    <ReportAndSeeCode 
+                        successPage="/result-storefront" 
+                        buttonText={"Ver código"} 
+                        buttonClasses={"btn btn-primary shadow font-monospace fs-6 m-auto"}
+                        totalSelection={totalSelection}
+                    />
             </>
             :
                 <EditCheckout/>
             }
 
-        </section>
+        </section>        
         </>
     )
 }

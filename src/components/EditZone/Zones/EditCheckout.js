@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { OptionsContextCheckout } from '../../../context/optionsContextCheckout';
 import SwitcherBox from '../../resources/SwitcherBox';
+import ReportAndSeeCode from '../../resources/ModalReport';
+
 
 
 
 const EditCheckout = () => {
 
     const { paymentMethodsData, changeValueTextPayment, changeDisplayPayment } = useContext(OptionsContextCheckout);
-
+    const { totalSelectionCHOOptimized } = useContext(OptionsContextCheckout);
 
     return (
         <>
@@ -24,7 +26,12 @@ const EditCheckout = () => {
                     }
                 </div>
                 <div className='m-auto d-flex'>
-                    <Link to="/result-checkout" className="btn btn-primary shadow font-monospace fs-6 m-auto">&#60; Ver código &#62;</Link>
+                    <ReportAndSeeCode 
+                        successPage={"/result-checkout"}
+                        buttonText={"Ver código"} 
+                        buttonClasses={"btn btn-primary shadow font-monospace fs-6 m-auto"}
+                        totalSelection={totalSelectionCHOOptimized()}
+                    />
                 </div>
             </div>
         </>

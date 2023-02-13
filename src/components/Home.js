@@ -3,8 +3,7 @@ import Presentation from './Presentation';
 import EditZone from './EditZone/EditZone';
 import { useContext } from 'react';
 import { OptionZoneContext } from '../context/optionZoneContext';
-
-
+import { getReport, createReport } from '../firebase/reportFunctions';
 
 const Home = () => {
     const { zone, handleEditZoneSelected } = useContext(OptionZoneContext);

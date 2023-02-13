@@ -14,11 +14,6 @@ const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) =>
     const [ switcherDisplay, setSwitcherDisplay ] = useState(content.dataContext.display);
 
 
-    content.img.forEach(url => {
-        console.log(url);
-
-    });
-
     const contentShowOrHide = (e) =>{
         if (switcherDisplay === true){
             //Ocultar contenido
@@ -54,8 +49,8 @@ const SwitcherBox = ({content, changeValueTextPayment, changeDisplayPayment}) =>
                 </h4>
                 {content.img.length > 0 ?
                     <div className='payment-img-container d-flex'>
-                        {content.img.map((url) =>{
-                            return <img className='payment-img ms-3' alt={'Logo de ' + content.paymentName} src={url}/>
+                        {content.img.map((url, index) =>{
+                            return <img key={index} className='payment-img ms-3' alt={'Logo de ' + content.paymentName} src={url}/>
                         })}
                     </div>
                 : 

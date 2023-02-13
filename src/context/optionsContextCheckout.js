@@ -149,7 +149,6 @@ export const OptionsCheckout = ({children}) => {
     const changeValueTextPayment = (paymentId, textEntry) => {
         payments[paymentId].text = textEntry;
         setPayments({...payments});
-        console.log(payments[paymentId].text);
     }
 
 
