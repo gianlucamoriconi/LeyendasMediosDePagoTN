@@ -9,6 +9,7 @@ const initMercadopagoOffline = JSON.parse(localStorage.getItem('mercadopagoOffli
 const initUalaTransparente = JSON.parse(localStorage.getItem('ualaTransparenteCHO')) || {id: "UALA_PROD", display: false, text: null};
 const initGetnetTransparente = JSON.parse(localStorage.getItem('getnetTransparenteCHO')) || {id: "GETNET_PROD", display: false, text: null};
 const initNuvempago = JSON.parse(localStorage.getItem('nuvemPagoCHO')) || {id: "nuvempago_transparent_card", display: false, text: null};
+const initMobbex = JSON.parse(localStorage.getItem('mobbexCHO')) || {id: "mobbex_gateway_external", display: false, text: null};
 const initModoModal = JSON.parse(localStorage.getItem('modoModalCHO')) || {id: "modo_modal", display: false, text: null};
 const initModoRedirect = JSON.parse(localStorage.getItem('modoRedirectCHO')) || {id: "modo_redirect", display: false, text: null};
 const initCustomWire = JSON.parse(localStorage.getItem('customWireCHO')) || {id: "custom_payment_wire_transfer_production", display: false, text: null};
@@ -24,6 +25,7 @@ export const OptionsCheckout = ({children}) => {
     const [UALA_PROD, set_UALA_PROD] = useState(initUalaTransparente);
     const [GETNET_PROD, set_GETNET_PROD] = useState(initGetnetTransparente);
     const [nuvempago_transparent_card, set_nuvempago_transparent_card] = useState(initNuvempago);
+    const [mobbex_gateway_external, set_mobbex_gateway_external] = useState(initMobbex);
     const [modo_redirect, setModoRedirect] = useState(initModoRedirect);
     const [modo_modal, setModoModal] = useState(initModoModal);
     const [custom_payment_wire_transfer_production, set_custom_payment_wire_transfer_production] = useState(initCustomWire);
@@ -35,6 +37,7 @@ export const OptionsCheckout = ({children}) => {
         mercadopago_redirect: initMercadopagoRedirect,
         mercadopago_transparent_offline: initMercadopagoOffline,
         UALA_PROD: initUalaTransparente,
+        mobbex_gateway_external: initMobbex,
         modo_redirect: initModoRedirect,
         modo_modal: initModoModal,
         GETNET_PROD: initGetnetTransparente,
@@ -109,6 +112,13 @@ export const OptionsCheckout = ({children}) => {
             setValuePayment: set_nuvempago_transparent_card
         },
         {
+            id: "mobbex_gateway_external",
+            paymentName: "Mobbex",
+            img: ["https://res.mobbex.com/tiendanube/mobbex-logo-160x100px.png"],
+            dataContext: payments.mobbex_gateway_external,
+            setValuePayment: set_mobbex_gateway_external
+        },
+        {
             id: "modo_redirect",
             paymentName: "MODO Redirect",
             img: ["https://ecommerce.modo.com.ar/modo-400.png"],
@@ -165,6 +175,7 @@ export const OptionsCheckout = ({children}) => {
             UALA_PROD,
             GETNET_PROD,
             nuvempago_transparent_card,
+            mobbex_gateway_external,
             modo_redirect,
             modo_modal,
             custom_payment_wire_transfer_production,

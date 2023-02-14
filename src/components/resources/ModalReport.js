@@ -8,7 +8,7 @@ import { createReport } from '../../firebase/reportFunctions';
 import Spinner from 'react-bootstrap/Spinner';
 
 
-const ModalCustom = ({body, question, buttonClasses, buttonText, successPage, failAction, totalSelection}) => {
+const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText, successPage, failAction, totalSelection}) => {
     const [show, setShow] = useState(false);
     const [spinnerSubmit, setSpinnerSubmit] = useState({
         text: "Enviar",
@@ -48,10 +48,10 @@ const ModalCustom = ({body, question, buttonClasses, buttonText, successPage, fa
             const report = {
                 storeId: Number(storeId),
                 githubId: Number(githubId),
-                type: githubType,
+                githubType: githubType,
                 date: currentDate,
-                totalSelection: totalSelection
-
+                totalSelection: totalSelection,
+                checkoutOrStore: checkoutOrStore
             };
 
             console.log(report);

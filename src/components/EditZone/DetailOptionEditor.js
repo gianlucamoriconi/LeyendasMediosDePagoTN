@@ -60,7 +60,6 @@ const DetailOptionEditor = (props) => {
             }
         });
 
-        console.log(imagesSelected);
 
         const boxObjectToAdd = {
             id: Number(boxChangingId) || '',
@@ -108,7 +107,6 @@ const DetailOptionEditor = (props) => {
                     autoComplete="off"
                 >
                     {payments[savedId].map((box) =>{
-
                             return(
                             <div key={box.id} id={box.id} className="d-flex flex-wrap col-12 box-config w-100 ps-2 pe-2 pt-4 pb-4 mb-4 border-bottom" data-type={box.savedId}>
                                 <div className='d-flex flex-wrap col-11'>
@@ -126,15 +124,17 @@ const DetailOptionEditor = (props) => {
                                     <div className='d-flex col-12'>
                                         <Form.Group className="d-flex flex-wrap col-12 pe-2 images-select">
                                             {imagesPaymentOptions.map((paym) => {
+                                                
                                                 return (<Form.Check
                                                             key={paym.name}
                                                             data-image={JSON.stringify(paym)}
-                                                            className={'image-box-option shadow-sm p-0 rounded ' + paym.name}
+                                                            className={'image-box-option shadow-sm p-0 rounded ' + paym.name }
                                                             data-id={box.id}
                                                             inline
                                                             label={paym.name}
                                                             name="group1"
                                                             type="checkbox"
+                                                            checked={box.images ? box.images.some(e => e.name === paym.name) : false}
                                                             id={paym.name}
                                                             onChange={handleChange}
                                                             onClick={handleVisualChangeCheckboxImage}

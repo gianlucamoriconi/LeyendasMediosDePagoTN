@@ -25,11 +25,12 @@ const Idea = ({totalSelection}) => {
             let paymentsInModal = opcionesElegidasParsed.detailModalNew;
         
             for (const paymentName in paymentsInModal) {
-                
-                if (paymentsInModal[paymentName].length > 1){
+                console.log(paymentName);
+                if (paymentsInModal[paymentName].length > 0){
         
                     let paymentIdSelector = paymentsInModal[paymentName][0].idSelector;
-                    $(paymentIdSelector).find("h6.mb-2:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box.p-3").eq(0).find("div").remove();
+                    console.log(paymentIdSelector);
+                    $(paymentIdSelector).find("h6.mb-3:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box").eq(0).find("div").remove();
 
         
                     let price = $("#price_display").text().replace(/[$.]+/g,"");
@@ -51,10 +52,10 @@ const Idea = ({totalSelection}) => {
                             nuevaCajaDeCuotas = '<div data-installments="'+box.id+'"><h4 class="font-weight-normal mb-1">'+box.numberInstallment+' cuotas <span>con interés</span></h4><h6 class="font-weight-normal mb-2"><span>En 1 pago: </span><strong class="js-installments-one-payment">$'+newPriceParsed+'</strong></span></h6><div class="mb-3"></div><div class="divider"></div></div>';
                         }
         
-                        $(paymentIdSelector).find("h6.mb-2:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box.p-3").eq(0).append(nuevaCajaDeCuotas); 
+                        $(paymentIdSelector).find("h6.mb-3:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box").eq(0).append(nuevaCajaDeCuotas); 
                         
                         box.images.forEach(img => {
-                            $(paymentIdSelector).find("h6.mb-2:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box.p-3").eq(0).find("div[data-installments='" +box.id.toString()+"'] h6+.mb-3 ").eq(0).append('<span><img src="'+img.image+'" data-src="'+img.image+'" class="card-img card-img-big lazyloaded" alt="'+img.name+'"></span>');
+                            $(paymentIdSelector).find("h6.mb-3:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box").eq(0).find("div[data-installments='" +box.id.toString()+"'] h6+.mb-3 ").eq(0).append('<span><img src="'+img.image+'" data-src="'+img.image+'" class="card-img card-img-big lazyloaded" alt="'+img.name+'"></span>');
                         });
                         
                     });
@@ -62,7 +63,7 @@ const Idea = ({totalSelection}) => {
                     //CAJA DE 1 CUOTA
                     let cajaDe1cuota = '<div><h4 class="font-weight-normal mb-1">En 1 pago <span>sin interés</span></h4><h6 class="font-weight-normal mb-2"><span class="mr-1"><span>CFT: </span><strong>0,00%</strong></span><span class="mr-1"><span>Total: </span><strong class="js-installments-one-payment">$'+newPriceParsed+'</strong></span></h6><div class="divider"></div></div>';
         
-                    $(paymentIdSelector).find("h6.mb-2:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box.p-3").eq(0).append(cajaDe1cuota);
+                    $(paymentIdSelector).find("h6.mb-2:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box").eq(0).append(cajaDe1cuota);
             
                 }
             }
@@ -196,8 +197,7 @@ const Idea = ({totalSelection}) => {
                                 let paymentMethod = $(this)[0].paymentMethod;
                                 let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
                                 precioConDescuento = formatterAR.format(precioConDescuento);
-                                const leyenda = '<span class="col-12 mb-2"><span class="float-left mr-2"><svg class="icon-inline svg-icon-accent icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M320 144c-53 0-96 50.1-96 112 0 61.8 43 112 96 112s96-50.1 96-112-43-112-96-112zm0 192c-35.3 0-64-35.9-64-80s28.7-80 64-80 64 35.9 64 80-28.7 80-64 80zM608 64H32A32 32 0 000 96v320a32 32 0 0032 32h576a32 32 0 0032-32V96a32 32 0 00-32-32zM32 96h64a64 64 0 01-64 64V96zm0 320v-64a64 64 0 0164 64H32zm576 0h-64a64 64 0 0164-64v64zm0-96c-52.9 0-96 43.1-96 96H128c0-52.9-43.1-96-96-96V192c52.9 0 96-43.1 96-96h384c0 52.9 43.1 96 96 96v128zm0-160a64 64 0 01-64-64h64v64z"></path></svg></span><span><strong class="text-accent">'+ numeroDeDescuento +'% de descuento</strong> con '+ paymentMethod +'</span></span>';    
-    
+                                const leyenda = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments col-12  mb-2" style="display: block;"><span class="float-left mr-2"><svg class="svg-inline--fa fa-lg svg-icon-accent float-left" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM48 64h480c8.8 0 16 7.2 16 16v48H32V80c0-8.8 7.2-16 16-16zm480 384H48c-8.8 0-16-7.2-16-16V224h512v208c0 8.8-7.2 16-16 16zm-336-84v8c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v8c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12zm160-166H32v-41h512v41z"></path></svg></span><span class="js-max-installments"><strong>'+ numeroDeDescuento +'%</strong> de descuento con <strong>'+ paymentMethod +'</strong></span></span>';
                                 $("#single-product a#btn-installments").before(leyenda);
                             }
                         });
@@ -215,9 +215,10 @@ const Idea = ({totalSelection}) => {
                                 var leyenda = '';
     
                                 if (paymentMethod === ""){
-                                    leyenda = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments col-12 mb-2"><span class="float-left mr-2"><svg class="icon-inline svg-icon-accent icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M498.5,470.3H77.5C34.7,470.3,0,435.6,0,392.9V119.1c0-42.7,34.7-77.5,77.5-77.5h421.1c42.7,0,77.5,34.7,77.5,77.5v273.7 C576,435.6,541.3,470.3,498.5,470.3z M77.5,70.3c-27,0-48.9,21.9-48.9,48.9v273.7c0,27,21.9,48.9,48.9,48.9h421.1 c27,0,48.9-21.9,48.9-48.9V119.1c0-27-21.9-48.9-48.9-48.9H77.5z M218.1,371.8c0-7.9-6.4-14.3-14.3-14.3H98.5 c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C211.7,386.1,218.1,379.7,218.1,371.8z M365.5,371.8c0-7.9-6.4-14.3-14.3-14.3 H245.9c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C359.1,386.1,365.5,379.7,365.5,371.8z M512.8,371.8 c0-7.9-6.4-14.3-14.3-14.3H393.3c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C506.4,386.1,512.8,379.7,512.8,371.8z M512.8,140.2c0-7.9-6.4-14.3-14.3-14.3h-42.1c-7.9,0-14.3,6.4-14.3,14.3c0,7.9,6.4,14.3,14.3,14.3h42.1 C506.4,154.5,512.8,148.1,512.8,140.2z M203.8,259.8H98.5c-7.9,0-14.3-6.4-14.3-14.3V140.2c0-7.9,6.4-14.3,14.3-14.3h105.3 c7.9,0,14.3,6.4,14.3,14.3v105.3C218.1,253.4,211.7,259.8,203.8,259.8z M112.8,231.2h76.7v-76.7h-76.7V231.2z"></path></svg></span><span class="d-table"><span class="js-max-installments"><span class="text-accent font-weight-bold"><span class="js-installment-amount installment-amount">'+ numeroDeCuota +'</span> cuotas sin interés</span> de <span class="js-installment-price installment-price">$'+ valorDeCuota +'</span></span></span></span>';
+                                    leyenda = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments col-12  mb-2" style="display: block;"><span class="float-left mr-2"><svg class="svg-inline--fa fa-lg svg-icon-accent float-left" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM48 64h480c8.8 0 16 7.2 16 16v48H32V80c0-8.8 7.2-16 16-16zm480 384H48c-8.8 0-16-7.2-16-16V224h512v208c0 8.8-7.2 16-16 16zm-336-84v8c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v8c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12zm160-166H32v-41h512v41z"></path></svg></span><span class="js-max-installments"><strong>'+ numeroDeCuota +'</strong> cuotas sin interés <strong>$'+ valorDeCuota +'</strong></span></span>';
+
                                 } else{
-                                    leyenda = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments col-12 mb-2"><span class="float-left mr-2"><svg class="icon-inline svg-icon-accent icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M498.5,470.3H77.5C34.7,470.3,0,435.6,0,392.9V119.1c0-42.7,34.7-77.5,77.5-77.5h421.1c42.7,0,77.5,34.7,77.5,77.5v273.7 C576,435.6,541.3,470.3,498.5,470.3z M77.5,70.3c-27,0-48.9,21.9-48.9,48.9v273.7c0,27,21.9,48.9,48.9,48.9h421.1 c27,0,48.9-21.9,48.9-48.9V119.1c0-27-21.9-48.9-48.9-48.9H77.5z M218.1,371.8c0-7.9-6.4-14.3-14.3-14.3H98.5 c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C211.7,386.1,218.1,379.7,218.1,371.8z M365.5,371.8c0-7.9-6.4-14.3-14.3-14.3 H245.9c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C359.1,386.1,365.5,379.7,365.5,371.8z M512.8,371.8 c0-7.9-6.4-14.3-14.3-14.3H393.3c-7.9,0-14.3,6.4-14.3,14.3s6.4,14.3,14.3,14.3h105.3C506.4,386.1,512.8,379.7,512.8,371.8z M512.8,140.2c0-7.9-6.4-14.3-14.3-14.3h-42.1c-7.9,0-14.3,6.4-14.3,14.3c0,7.9,6.4,14.3,14.3,14.3h42.1 C506.4,154.5,512.8,148.1,512.8,140.2z M203.8,259.8H98.5c-7.9,0-14.3-6.4-14.3-14.3V140.2c0-7.9,6.4-14.3,14.3-14.3h105.3 c7.9,0,14.3,6.4,14.3,14.3v105.3C218.1,253.4,211.7,259.8,203.8,259.8z M112.8,231.2h76.7v-76.7h-76.7V231.2z"></path></svg></span><span class="d-table"><span class="js-max-installments"><span class="text-accent font-weight-bold"><span class="js-installment-amount installment-amount">'+ numeroDeCuota +'</span> cuotas sin interés</span> de <span class="js-installment-price installment-price">$'+ valorDeCuota +' pagando con '+ paymentMethod +'</span></span></span></span>';
+                                    leyenda = '<span class="js-max-installments-container cuotas-custom-ts js-max-installments col-12  mb-2" style="display: block;"><span class="float-left mr-2"><svg class="svg-inline--fa fa-lg svg-icon-accent float-left" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM48 64h480c8.8 0 16 7.2 16 16v48H32V80c0-8.8 7.2-16 16-16zm480 384H48c-8.8 0-16-7.2-16-16V224h512v208c0 8.8-7.2 16-16 16zm-336-84v8c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v8c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12zm160-166H32v-41h512v41z"></path></svg></span><span class="js-max-installments"><strong>'+ numeroDeCuota +'</strong> cuotas sin interés <strong>$'+ valorDeCuota +' con '+ paymentMethod +'</strong></span></span>';
                                 }
                         
                                 if ($("#single-product .js-product-payments-container > span.col-12.mb-2").length){
@@ -242,7 +243,7 @@ const Idea = ({totalSelection}) => {
         //declarar funcion
         cartFunction = `function leyendaEnCarrito(){
     
-            let price = $("span.js-cart-total").text().replace(/[$.]+/g,"");
+            let price = document.querySelector(".js-cart-total").innerText.replace(/[$.]+/g,"");
             price = parseFloat(price).toFixed(2);
             let leyendaCarrito = '<div id="custom-cart-text" class="js-installments-cart-total text-right"></div>';
             $("#modal-cart .js-installments-cart-total").replaceWith(leyendaCarrito);
@@ -286,7 +287,7 @@ const Idea = ({totalSelection}) => {
             }
         });
     
-        observer.observe(document.querySelector("#modal-cart span.js-cart-total"), {
+        observer.observe(document.querySelector("#modal-cart .js-cart-total"), {
             subtree: true,
             childList: true,
             attributes: true,
@@ -295,7 +296,8 @@ const Idea = ({totalSelection}) => {
     }
 
 
-    return(`<script>
+    return(`<!--Inicio de: cuotas custom por APP-->
+    <script>
     //Idea
     const opcionesElegidasJSON = '${JSON.stringify(totalSelection)}';
     let opcionesElegidasParsed = JSON.parse(opcionesElegidasJSON);
@@ -329,7 +331,13 @@ const Idea = ({totalSelection}) => {
 
     ${cartExecution}
 
-    </script>`
+    </script>
+    <style>
+    .js-max-installments-container:not(.cuotas-custom-ts){
+        display: none!important;
+    }
+    </style>
+<!--Fin de: cuotas custom por APP-->`
     )
 };
 

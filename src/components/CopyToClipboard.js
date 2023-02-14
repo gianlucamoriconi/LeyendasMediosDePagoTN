@@ -6,13 +6,6 @@ import { useState } from 'react';
 
 const CopyToClipboard = () =>{
 
-    /*
-        Estados del boton de copiar código:
-        - "ready" significa que está disponible para ser cliqueado
-        - "done" significa que hicimos click sobre el boton y mostramos que el texto fue copiado.
-        Dura unos pocos segundos.
-
-    */
     const [copyIcon, setCopyIcon] = useState(<BiCopy/>);
 
     const textToCopy = (e) =>{

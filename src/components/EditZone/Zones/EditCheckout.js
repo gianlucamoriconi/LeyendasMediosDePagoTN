@@ -1,5 +1,4 @@
 import Title from './Title';
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { OptionsContextCheckout } from '../../../context/optionsContextCheckout';
 import SwitcherBox from '../../resources/SwitcherBox';
@@ -27,6 +26,7 @@ const EditCheckout = () => {
                 </div>
                 <div className='m-auto d-flex'>
                     <ReportAndSeeCode 
+                        checkoutOrStore="checkout"
                         successPage={"/result-checkout"}
                         buttonText={"Ver código"} 
                         buttonClasses={"btn btn-primary shadow font-monospace fs-6 m-auto"}

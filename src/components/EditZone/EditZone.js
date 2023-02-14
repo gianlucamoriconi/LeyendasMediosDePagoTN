@@ -4,18 +4,14 @@ import DetailMain from './Zones/DetailMain';
 import DetailModal from './Zones/DetailModal';
 import EditCheckout from './Zones/EditCheckout';
 import Cart from './Zones/Cart';
-import { Link, useNavigate } from "react-router-dom";
 import { OptionsContextObject } from '../../context/optionsContextObject';
-import { useState, useEffect, useContext, useCallback } from 'react';
+import { useContext } from 'react';
 import ReportAndSeeCode from '../resources/ModalReport';
 
 
 
 
 const EditZone = ({zone, handleEditZoneSelected}) => {
-    const navigate = useNavigate();
-    const goToCode = useCallback(() => navigate(`/result-storefront` , {replace: true}), [navigate]);
-
 
     const { totalSelection } = useContext(OptionsContextObject);
     
@@ -42,6 +38,7 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
                     <Box component={<DetailModal/>}/>          
                     <button onClick={verInfoTotal}>Ver objeto en consola</button>
                     <ReportAndSeeCode 
+                        checkoutOrStore="storefront"
                         successPage="/result-storefront" 
                         buttonText={"Ver código"} 
                         buttonClasses={"btn btn-primary shadow font-monospace fs-6 m-auto"}
