@@ -8,7 +8,7 @@ const createReport = (report, successAction = null, failAction = null) => {
             console.log(doc);
             successAction();
         })
-        .catch( (error, failAction) =>{
+        .catch( (error) =>{
             console.log(error);
             return failAction();
         })

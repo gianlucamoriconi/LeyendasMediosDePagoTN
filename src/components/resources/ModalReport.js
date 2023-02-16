@@ -44,6 +44,7 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
             const storeId = document.getElementById("store-id").value;
             const githubId = document.getElementById("github-id").value;
             const githubType = document.getElementById("issue-radio").checked ? "issue" : document.getElementById("problem-radio").checked ? "problem" : null;
+            const comments = document.getElementById("comments").value;
             
             const report = {
                 storeId: Number(storeId),
@@ -51,7 +52,8 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
                 githubType: githubType,
                 date: currentDate,
                 totalSelection: totalSelection,
-                checkoutOrStore: checkoutOrStore
+                checkoutOrStore: checkoutOrStore,
+                comments: comments
             };
 
             console.log(report);
@@ -70,6 +72,7 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
                     disabled: false
                 });
                 console.log("Falló!");
+                alert("No estás autorizado para usar la app");
 
             };
 

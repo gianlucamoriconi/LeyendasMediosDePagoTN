@@ -89,6 +89,14 @@ html, body{
   background-size: 10%; 
 }
 
+
+.fixed-bottom-right{
+  position: fixed;
+  right: 20px;
+  bottom: 12px;
+  z-index: 1030;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -461,7 +469,6 @@ footer {
     right: 14px;
     margin: auto;
     border-radius: 20px;
-    background: #21252908;
     backdrop-filter: blur(5px);
     max-width: fit-content;
 }
@@ -565,6 +572,10 @@ div#guide {
 
 .blur{
   backdrop-filter: blur(20px);
+}
+
+.background-light{
+  background: #21252908;
 }
 
 #bottom-menu{
@@ -740,3 +751,41 @@ strong.main-title {
   }
 }
 
+
+
+.user-image{
+  max-width: 36px;
+  border-radius: 40px;
+}
+
+
+@media (max-width: 767px) {
+  .user-image{
+    max-width: 30px;
+  }
+}
+
+
+.container-user-nav{
+  border: 1px solid transparent;
+  border-radius: 10px 40px 40px 10px;
+  transition: 0.4s;
+
+
+  &:hover{
+    filter: brightness(1.1);
+    border: 1px solid rgb(0, 242, 226);
+    transition: 0.4s;
+  }
+
+}
+
+.log-button{
+  font-size: 13px;
+}
+
+@media (max-width: 767px) {
+  .log-button{
+    font-size: 12px;
+  }
+}

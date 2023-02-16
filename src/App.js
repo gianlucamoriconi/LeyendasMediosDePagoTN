@@ -7,25 +7,30 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { OptionsProvider } from './context/optionsContextObject';
 import { OptionZoneProvider } from './context/optionZoneContext';
 import { OptionsCheckout } from './context/optionsContextCheckout';
+import { AuthContextProvider } from './context/googleAuth';
+import SignIn from './components/userAuth/SignIn';
 
 
 
 
 function App() {
   return (
-    <OptionsCheckout>
-      <OptionZoneProvider>
-        <OptionsProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={ <Home /> }/>
-              <Route path="/result-storefront" element={ <ResultStorefront /> }/>
-              <Route path="/result-checkout" element={ <ResultCheckout /> }/>
-            </Routes>
-          </BrowserRouter>
-        </OptionsProvider>
-      </OptionZoneProvider>
-    </OptionsCheckout>
+    <AuthContextProvider>
+      <OptionsCheckout>
+        <OptionZoneProvider>
+          <OptionsProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={ <Home /> }/>
+                <Route path="/login" element={ <SignIn /> }/>
+                <Route path="/result-storefront" element={ <ResultStorefront /> }/>
+                <Route path="/result-checkout" element={ <ResultCheckout /> }/>
+              </Routes>
+            </BrowserRouter>
+          </OptionsProvider>
+        </OptionZoneProvider>
+      </OptionsCheckout>
+    </AuthContextProvider>
 
   );
 }
