@@ -3,20 +3,20 @@ const Atlantico = ({totalSelection}) => {
     const opcionesElegidasJSON = JSON.stringify(totalSelection);
     let opcionesElegidasParsed = JSON.parse(opcionesElegidasJSON);
 
-    var detailModalFunction = "";
-    var detailModalExecution1 = "";
-    var detailModalExecution2 = "";  
+    let detailModalFunction = "";
+    let detailModalExecution1 = "";
+    let detailModalExecution2 = "";  
 
-    var detailMainFunction = "";
-    var detailMainExecution1 = "";
-    var detailMainExecution2 = "";  
+    let detailMainFunction = "";
+    let detailMainExecution1 = "";
+    let detailMainExecution2 = "";  
 
-    var itemsFunction = "";
-    var itemsExecution1 = "";
-    var itemsExecution2 = "";
+    let itemsFunction = "";
+    let itemsExecution1 = "";
+    let itemsExecution2 = "";
 
-    var cartFunction = "";
-    var cartExecution = "";
+    let cartFunction = "";
+    let cartExecution = "";
 
     if (opcionesElegidasParsed.detailModalNew !== undefined) {
         //declarar funcion

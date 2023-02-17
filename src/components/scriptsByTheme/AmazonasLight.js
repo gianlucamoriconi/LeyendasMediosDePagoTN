@@ -1,23 +1,26 @@
 const AmazonasLight = ({totalSelection}) => {
+    const currentDate = new Date(Date.now()).toLocaleDateString();
     console.log(totalSelection);
     const opcionesElegidasJSON = JSON.stringify(totalSelection);
     let opcionesElegidasParsed = JSON.parse(opcionesElegidasJSON);
 
 
-    var detailModalFunction = "";
-    var detailModalExecution1 = "";
-    var detailModalExecution2 = "";  
+    let detailModalFunction = "";
+    let detailModalExecution1 = "";
+    let detailModalExecution2 = "";  
 
-    var detailMainFunction = "";
-    var detailMainExecution1 = "";
-    var detailMainExecution2 = "";  
+    let detailMainFunction = "";
+    let detailMainExecution1 = "";
+    let detailMainExecution2 = "";  
 
-    var itemsFunction = "";
-    var itemsExecution1 = "";
-    var itemsExecution2 = "";
+    let itemsFunction = "";
+    let itemsExecution1 = "";
+    let itemsExecution2 = "";
 
-    var cartFunction = "";
-    var cartExecution = "";
+    let cartFunction = "";
+    let cartExecution = "";
+
+    let styles = "";
 
     if (opcionesElegidasParsed.detailModalNew !== undefined) {
         //declarar funcion
@@ -75,45 +78,70 @@ const AmazonasLight = ({totalSelection}) => {
     }
 
     if (opcionesElegidasParsed.itemProducts !== undefined) {
+
+        let installmentsFor = "";
+        let discountFor = "";
+
+        const itemProducts = opcionesElegidasParsed.itemProducts;
+
+        const installmentsIsConfigurated = itemProducts.some(element => {
+            return element.typefield === "installments";
+        });
+    
+        const discountIsConfigurated = itemProducts.some(element => {
+            return element.typefield === "discount";
+        });
+    
+    
+        if (installmentsIsConfigurated === true) {
+            installmentsFor = `if ($(this)[0].typefield === "installments") {
+                    let numeroDeCuota = $(this)[0].installments;
+                    let valorDeCuota = (price/numeroDeCuota).toFixed(2);
+                    valorDeCuota = formatterAR.format(valorDeCuota);
+                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">$'+ valorDeCuota +'</span></span></span></div>';
+    
+                    item.find(".item-description").append(cuotaCustomItem);
+                }`;
+        }
+    
+    
+        if (discountIsConfigurated === true) {
+            discountFor = `if ($(this)[0].typefield === "discount") {
+                    let numeroDeDescuento = $(this)[0].discountPercentage;
+                    let paymentMethod = $(this)[0].paymentMethod;
+                    let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
+                    precioConDescuento = formatterAR.format(precioConDescuento);
+                    const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">$'+ paymentMethod +'</span></span></span></div>';
+        
+                    item.find(".item-description").append(cuotaCustomItem);
+                }`;
+        }
+
+
         //declarar funcion
         itemsFunction = `function cambiarLeyendaEnItem(item){
-                let price = item.find(".js-price-display").text().replace(/[$.]+/g,"");
-                price = parseFloat(price).toFixed(2);
+        let price = item.find(".js-price-display").text().replace(/[$.]+/g,"");
+        price = parseFloat(price).toFixed(2);
             
+        const itemProducts = opcionesElegidasParsed.itemProducts;
+
+        if (itemProducts.length > 0) {
             
-                if (opcionesElegidasParsed.itemProducts.length > 0) {
-            
-                if (item.find(".js-max-installments-container").length) {
-                    item.find(".js-max-installments-container").each(function(){
-                    $(this).remove();
-                    });
-                }
-                
-                $(opcionesElegidasParsed.itemProducts).each(function(){
-            
-                    if ($(this)[0].typefield === "installments") {
-                        let numeroDeCuota = $(this)[0].installments;
-                        let valorDeCuota = (price/numeroDeCuota).toFixed(2);
-                        valorDeCuota = formatterAR.format(valorDeCuota);
-                        const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-installment-price installment-price font-weight-bold">$'+ valorDeCuota +'</span></span></span></div>';
-            
-                        item.find(".item-description").append(cuotaCustomItem);
-                    }
-            
-                    if ($(this)[0].typefield === "discount") {
-                        let numeroDeDescuento = $(this)[0].discountPercentage;
-                        let paymentMethod = $(this)[0].paymentMethod;
-                        let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
-                        precioConDescuento = formatterAR.format(precioConDescuento);
-                        const cuotaCustomItem = '<div><span class="js-max-installments-container cuotas-custom-ts js-max-installments item-installments"><span class="js-max-installments-custom"><span class="js-installment-amount installment-amount font-weight-bold">'+ numeroDeDescuento +'%</span> de descuento con <span class="js-installment-price installment-price font-weight-bold">$'+ paymentMethod +'</span></span></span></div>';
-                
-                        item.find(".item-description").append(cuotaCustomItem);
-                    }
-            
+            if (item.find(".js-max-installments-container").length) {
+                item.find(".js-max-installments-container").each(function(){
+                $(this).remove();
                 });
-                }
+            }
+                
+            $(opcionesElegidasParsed.itemProducts).each(function(){
+                
+                ${discountFor}
+                ${installmentsFor}
+        
+            });
+        }
             
-            };`;
+    };`;
 
 
         //declarar ejecucion de funcion
@@ -240,28 +268,24 @@ const AmazonasLight = ({totalSelection}) => {
     }
 
     if (opcionesElegidasParsed.cart !== undefined) {
-        //declarar funcion
-        cartFunction = `function leyendaEnCarrito(){
+
+        let installmentsCartFor = "";
+        let discountCartFor = "";
+
+        const cart = opcionesElegidasParsed.cart;
+
+        const installmentsIsConfigurated = cart.some(element => {
+            return element.typefield === "installments";
+        });
     
-            let price = $("span.js-cart-total").text().replace(/[$.]+/g,"");
-            price = parseFloat(price).toFixed(2);
-            let leyendaCarrito = '<div id="custom-cart-text" class="js-installments-cart-total text-right"></div>';
-            $("#modal-cart .js-installments-cart-total").replaceWith(leyendaCarrito);
+        const discountIsConfigurated = cart.some(element => {
+            return element.typefield === "discount";
+        });
+
+
             
-            if (opcionesElegidasParsed.cart.length > 0) {
-                $(opcionesElegidasParsed.cart).each(function(){
-            
-                if ($(this)[0].typefield === "discount") {
-                    let numeroDeDescuento = $(this)[0].discountPercentage;
-                    let paymentMethod = $(this)[0].paymentMethodInput;
-                    let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
-                    precioConDescuento = formatterAR.format(precioConDescuento);
-                    const leyenda = '<div data-interest="0" data-cart-discount="'+ numeroDeDescuento +'" class="js-installments-cart-total cuota-carrito-custom text-right text-accent font-weight-bold">'+ numeroDeDescuento +'% de descuento con<span class="js-cart-installments-amount">'+ paymentMethod +'</span></div>';
-            
-                    $("#custom-cart-text").append(leyenda);
-                }
-            
-                if ($(this)[0].typefield === "installments") {
+        if (installmentsIsConfigurated === true) {
+            installmentsCartFor = `if ($(this)[0].typefield === "installments") {
                     let numeroDeCuota = $(this)[0].installments;
                     let valorDeCuota = (price/numeroDeCuota).toFixed(2);
                     valorDeCuota = formatterAR.format(valorDeCuota);
@@ -269,8 +293,34 @@ const AmazonasLight = ({totalSelection}) => {
                     const leyenda = '<div data-interest="0" data-cart-installment="'+ numeroDeCuota +'" class="js-installments-cart-total cuota-carrito-custom text-right text-accent font-weight-bold">O hasta <span class="js-cart-installments-amount">'+ numeroDeCuota +'</span> cuotas sin interés de <span class="js-cart-installments installment-price">$'+ valorDeCuota +'</span></div>';
             
                     $("#custom-cart-text").append(leyenda);
-                }
+                }`;
+        }
+    
+    
+        if (discountIsConfigurated === true) {
+            discountCartFor = `if ($(this)[0].typefield === "discount") {
+                    let numeroDeDescuento = $(this)[0].discountPercentage;
+                    let paymentMethod = $(this)[0].paymentMethodInput;
+                    let precioConDescuento = (price - numeroDeDescuento).toFixed(2);
+                    precioConDescuento = formatterAR.format(precioConDescuento);
+                    const leyenda = '<div data-interest="0" data-cart-discount="'+ numeroDeDescuento +'" class="js-installments-cart-total cuota-carrito-custom text-right text-accent font-weight-bold">'+ numeroDeDescuento +'% de descuento con<span class="js-cart-installments-amount">'+ paymentMethod +'</span></div>';
+        
+                    $("#custom-cart-text").append(leyenda);
+                }`;
+        }
+
+        //declarar funcion
+        cartFunction = `function leyendaEnCarrito(){
+            const cart = opcionesElegidasParsed.cart;
+            let price = $("span.js-cart-total").text().replace(/[$.]+/g,"");
+            price = parseFloat(price).toFixed(2);
+            let leyendaCarrito = '<div id="custom-cart-text" class="js-installments-cart-total text-right"></div>';
+            $("#modal-cart .js-installments-cart-total").replaceWith(leyendaCarrito);
             
+            if (cart.length > 0) {
+                $(cart).each(function(){
+                    ${installmentsCartFor}
+                    ${discountCartFor}
                 });
             }
         
@@ -296,8 +346,12 @@ const AmazonasLight = ({totalSelection}) => {
     }
 
 
-    return(`<script>
+    return(`
+<!-- Inicio de: APP LEYENDAS - cambiar leyenda promocional medios de pago -->
+<script>
     //AMAZONAS ICONOS FINOS
+    //Fecha de creación: ${currentDate}
+
     const opcionesElegidasJSON = '${JSON.stringify(totalSelection)}';
     let opcionesElegidasParsed = JSON.parse(opcionesElegidasJSON);
     
@@ -330,7 +384,9 @@ const AmazonasLight = ({totalSelection}) => {
 
     ${cartExecution}
 
-    </script>`
+</script>
+${styles}
+<!-- Fin de: APP LEYENDAS - cambiar leyenda promocional medios de pago -->`
     )
 };
 
