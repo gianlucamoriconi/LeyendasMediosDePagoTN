@@ -5,17 +5,27 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { AiOutlineQuestionCircle } from 'react-icons/ai';
 import { createReport } from '../../firebase/reportFunctions';
+import { UserAuth } from '../../context/googleAuth';
 import Spinner from 'react-bootstrap/Spinner';
 
 
-const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText, successPage, failAction, totalSelection}) => {
+const ModalReport = ({checkoutOrStore, body, question, buttonClasses, buttonText, successPage, failAction, totalSelection}) => {
+
+    const { user } = UserAuth();
+
     const [show, setShow] = useState(false);
     const [spinnerSubmit, setSpinnerSubmit] = useState({
         text: "Enviar",
         disabled: false
     });
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+        if (user !== null) {
+            setShow(true);
+        } else{
+            alert("Debes iniciar sesión para poder ver el código");
+        }
+    };
     const navigate = useNavigate();
     const goToCode = useCallback(() => navigate(successPage , {replace: true}), [navigate]);
 
@@ -23,6 +33,7 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
+        
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
@@ -32,51 +43,67 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
             event.preventDefault();
             event.stopPropagation();
             
-            setSpinnerSubmit({
-                text: "Enviando...",
-                disabled: true
-            });
-
-            let date = new Date();
-            let currentDate = date.toISOString();
-
-            //Obtener los valores del form:
-            const storeId = document.getElementById("store-id").value;
-            const githubId = document.getElementById("github-id").value;
-            const githubType = document.getElementById("issue-radio").checked ? "issue" : document.getElementById("problem-radio").checked ? "problem" : null;
-            const comments = document.getElementById("comments").value;
-            
-            const report = {
-                storeId: Number(storeId),
-                githubId: Number(githubId),
-                githubType: githubType,
-                date: currentDate,
-                totalSelection: totalSelection,
-                checkoutOrStore: checkoutOrStore,
-                comments: comments
-            };
-
-            console.log(report);
-
-            const successAction = () => {
+            if (user !== null) {
+                
                 setSpinnerSubmit({
-                    text: "¡Gracias!",
-                    disabled: false
+                    text: "Enviando...",
+                    disabled: true
                 });
-                goToCode();
-            };
 
-            const failAction = () => {
-                setSpinnerSubmit({
-                    text: "Hubo un problema :(",
-                    disabled: false
-                });
-                console.log("Falló!");
-                alert("No estás autorizado para usar la app");
+                let date = new Date();
+                let currentDate = date.toISOString();
 
-            };
+                //Obtener los valores del form:
+                const storeId = document.getElementById("store-id").value;
+                const githubId = document.getElementById("github-id").value;
+                const githubType = document.getElementById("issue-radio").checked ? "issue" : document.getElementById("problem-radio").checked ? "problem" : null;
+                const comments = document.getElementById("comments").value;
+                
+                const report = {
+                    storeId: Number(storeId),
+                    githubId: Number(githubId),
+                    githubType: githubType,
+                    date: currentDate,
+                    totalSelection: totalSelection,
+                    checkoutOrStore: checkoutOrStore,
+                    comments: comments
+                };
 
-            createReport(report, successAction, failAction);
+
+                const successAction = () => {
+                    setSpinnerSubmit({
+                        text: "¡Gracias!",
+                        disabled: false
+                    });
+                    goToCode();
+                };
+
+                const failAction = () => {
+                    setSpinnerSubmit({
+                        text: "Hubo un problema :(",
+                        disabled: false
+                    });
+
+                    setTimeout(() => {
+                        setSpinnerSubmit({
+                            text: "Enviar nuevamente",
+                            disabled: false
+                        });
+                    }, 2000);
+
+                    console.log("Falló!");
+                    alert("No estás autorizado para usar la app. Si aún no iniciaste sesión");
+
+                };
+
+
+                console.log(user);
+
+                createReport(report, successAction, failAction);
+                
+            } else{
+                alert("Debes iniciar sesión para poder ver el código");
+            }
             
         }
     
@@ -167,4 +194,4 @@ const ModalCustom = ({checkoutOrStore, body, question, buttonClasses, buttonText
     );
 }
 
-export default ModalCustom;
+export default ModalReport;
