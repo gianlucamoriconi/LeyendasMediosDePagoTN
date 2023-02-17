@@ -96,9 +96,6 @@ const ModalReport = ({checkoutOrStore, body, question, buttonClasses, buttonText
 
                 };
 
-
-                console.log(user);
-
                 createReport(report, successAction, failAction);
                 
             } else{
