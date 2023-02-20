@@ -54,7 +54,7 @@ const Simple = ({totalSelection}) => {
                         }
         
                         else{
-                            nuevaCajaDeCuotas = '<div data-installments="'+box.id+'"><h4 class="font-weight-normal mb-1">'+box.numberInstallment+' cuotas <span>con interés</span></h4><h6 class="font-weight-normal mb-2"><span>En 1 pago: </span><strong class="js-installments-one-payment">$'+newPriceParsed+'</strong></span></h6><div class="mb-3"></div><div class="divider"></div></div>';
+                            nuevaCajaDeCuotas = '<div class="installments-container" data-installment-id="'+box.id+'"><h5 class="subtitle">'+box.numberInstallment+' cuotas <span class="font-medium text-uppercase">con interés</span></h5><div class="legal-info p-bottom-half"><span class="m-right-quarter"><span>O en 1 pago: </span><span class="js-installments-one-payment weight-strong">$'+newPriceParsed+'</span></span></div><div class="flags-container"></div><div class="divider-dotted"></div></div>';
                         }
         
                         $(paymentIdSelector).find(".box-title:contains(Tarjetas de crédito)").closest(paymentIdSelector).find(".box-container .pull-left.full-width.border-box").eq(0).append(nuevaCajaDeCuotas); 
