@@ -32,7 +32,7 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
             {zone.zone === "storefront" ?
             <>
                 
-                    <Box component={<Items/>}/>
+                    {/* <Box component={<Items/>}/>
                     <Box component={<DetailMain/>}/>
                     <Box component={<Cart/>}/>
                     <Box component={<DetailModal/>}/>          
@@ -43,7 +43,10 @@ const EditZone = ({zone, handleEditZoneSelected}) => {
                         buttonText={"Ver código"} 
                         buttonClasses={"btn btn-primary shadow font-monospace fs-6 m-auto"}
                         totalSelection={totalSelection}
-                    />
+                    /> */}
+                    <div>
+                        No está disponible
+                    </div>
             </>
             :
                 <EditCheckout/>

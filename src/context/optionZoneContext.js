@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 export const OptionZoneContext = createContext();
 
 
-const OptionZoneSaved = JSON.parse(localStorage.getItem('optionZone')) || {zone: "storefront", zoneTitle: "Para la tienda"};
+const OptionZoneSaved = JSON.parse(localStorage.getItem('optionZone')) || {zone: "checkout", zoneTitle: "Para la tienda"};
 
 
 export const OptionZoneProvider = ({children}) => {
