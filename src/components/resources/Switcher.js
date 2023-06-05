@@ -71,7 +71,7 @@ const Switcher = (props) => {
     return(
     <>
         <FormControlLabel className="mb-2 me-0 label-fw-light" onChange={(e) => contentShowOrHide(e)}
-        control={<SwitcherControl defaultChecked={switcherDefault} />}
+        control={<SwitcherControl checked={switcherDefault} />}
         label={labelName}
         />
         <div id={savedId} className={switcherOnOff === true ? "d-block content mb-4" : "d-none content"}>

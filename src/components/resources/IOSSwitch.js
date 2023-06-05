@@ -59,7 +59,7 @@ const IOSSwitcher = ({object, onOff}) => {
   return(
   <>
       <FormControlLabel onChange={(e) => onOff(e)}
-      control={<IOSSwitch id={object.id} defaultChecked={object.dataContext.display}/>}
+      control={<IOSSwitch id={object.id} checked={object.dataContext.display}/>}
       label={null}
       />
   </>

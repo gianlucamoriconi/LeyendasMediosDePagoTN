@@ -7,11 +7,13 @@ const initMercadopagoTransparente = JSON.parse(localStorage.getItem('mercadopago
 const initMercadopagoRedirect = JSON.parse(localStorage.getItem('mercadopagoRedirectCHO')) || {id: "mercadopago_redirect", display: false, text: null};
 const initMercadopagoOffline = JSON.parse(localStorage.getItem('mercadopagoOfflineCHO')) || {id: "mercadopago_transparent_offline", display: false, text: null};
 const initUalaTransparente = JSON.parse(localStorage.getItem('ualaTransparenteCHO')) || {id: "UALA_PROD", display: false, text: null};
+const initWibond = JSON.parse(localStorage.getItem('wibondRedirectCHO')) || {id: "wibond_redirect", display: false, text: null};
 const initGetnetTransparente = JSON.parse(localStorage.getItem('getnetTransparenteCHO')) || {id: "GETNET_PROD", display: false, text: null};
 const initNuvempago = JSON.parse(localStorage.getItem('nuvemPagoCHO')) || {id: "nuvempago_transparent_card", display: false, text: null};
 const initMobbex = JSON.parse(localStorage.getItem('mobbexCHO')) || {id: "mobbex_gateway_external", display: false, text: null};
 const initModoModal = JSON.parse(localStorage.getItem('modoModalCHO')) || {id: "modo_modal", display: false, text: null};
 const initModoRedirect = JSON.parse(localStorage.getItem('modoRedirectCHO')) || {id: "modo_redirect", display: false, text: null};
+const initDlocalTransparente = JSON.parse(localStorage.getItem('dlocalTransparenteCHO')) || {id: "dlocal_transparent_card", display: false, text: null};
 const initCustomWire = JSON.parse(localStorage.getItem('customWireCHO')) || {id: "custom_payment_wire_transfer_production", display: false, text: null};
 const initCustomCash = JSON.parse(localStorage.getItem('customCashCHO')) || {id: "custom_payment_cash_production", display: false, text: null};
 const initCustomOther = JSON.parse(localStorage.getItem('customOtherCHO')) || {id: "custom_payment_other_production", display: false, text: null};
@@ -23,11 +25,13 @@ export const OptionsCheckout = ({children}) => {
     const [mercadopago_redirect, set_mercadopago_redirect] = useState(initMercadopagoRedirect);
     const [mercadopago_transparent_offline, set_mercadopago_transparent_offline] = useState(initMercadopagoOffline);
     const [UALA_PROD, set_UALA_PROD] = useState(initUalaTransparente);
+    const [wibond_redirect, set_wibond_redirect] = useState(initWibond);
     const [GETNET_PROD, set_GETNET_PROD] = useState(initGetnetTransparente);
     const [nuvempago_transparent_card, set_nuvempago_transparent_card] = useState(initNuvempago);
     const [mobbex_gateway_external, set_mobbex_gateway_external] = useState(initMobbex);
     const [modo_redirect, setModoRedirect] = useState(initModoRedirect);
     const [modo_modal, setModoModal] = useState(initModoModal);
+    const [dlocal_transparent_card, setDlocalTransparente] = useState(initDlocalTransparente);
     const [custom_payment_wire_transfer_production, set_custom_payment_wire_transfer_production] = useState(initCustomWire);
     const [custom_payment_cash_production, set_custom_payment_cash_production] = useState(initCustomCash);
     const [custom_payment_other_production, set_custom_payment_other_production] = useState(initCustomOther);
@@ -37,9 +41,11 @@ export const OptionsCheckout = ({children}) => {
         mercadopago_redirect: initMercadopagoRedirect,
         mercadopago_transparent_offline: initMercadopagoOffline,
         UALA_PROD: initUalaTransparente,
+        wibond_redirect: initWibond,
         mobbex_gateway_external: initMobbex,
         modo_redirect: initModoRedirect,
         modo_modal: initModoModal,
+        dlocal_transparent_card: initDlocalTransparente,
         GETNET_PROD: initGetnetTransparente,
         nuvempago_transparent_card: initNuvempago,
         custom_payment_wire_transfer_production: initCustomWire,
@@ -98,6 +104,13 @@ export const OptionsCheckout = ({children}) => {
             setValuePayment: set_UALA_PROD, //REVISAR
         },
         {
+            id: "wibond_redirect",
+            paymentName: "Wibond",
+            img: ["https://repositorio-tiendanube.s3.us-east-2.amazonaws.com/logo-wibond-124x28.png"],
+            dataContext: payments.wibond_redirect,
+            setValuePayment: set_UALA_PROD, //REVISAR
+        },
+        {
             id: "GETNET_PROD",
             paymentName: "Getnet Transparente",
             img: ["https://placetopay-static-prod-bucket.s3.us-east-2.amazonaws.com/getnet-cl/microsites/images/IUiurDL047GLr2Nnu39sZPOum7PzgiAgyEocYzxx.png"],
@@ -131,6 +144,13 @@ export const OptionsCheckout = ({children}) => {
             img: ["https://ecommerce.modo.com.ar/modo-400.png"],
             dataContext: payments.modo_modal,
             setValuePayment: setModoModal
+        },
+        {
+            id: "dlocal_transparent_card",
+            paymentName: "Dlocal transparente",
+            img: ["https://d2r9epyceweg5n.cloudfront.net/stores/001/221/796/products/dlocal_logo1-64de9e8f262dc22b7f16787169301663-480-0.png"],
+            dataContext: payments.dlocal_transparent_card,
+            setValuePayment: setDlocalTransparente
         },
         {
             id: "custom_payment_wire_transfer_production",
@@ -173,11 +193,13 @@ export const OptionsCheckout = ({children}) => {
             mercadopago_redirect,
             mercadopago_transparent_offline,
             UALA_PROD,
+            wibond_redirect,
             GETNET_PROD,
             nuvempago_transparent_card,
             mobbex_gateway_external,
             modo_redirect,
             modo_modal,
+            dlocal_transparent_card,
             custom_payment_wire_transfer_production,
             custom_payment_cash_production,
             custom_payment_other_production,
@@ -185,6 +207,7 @@ export const OptionsCheckout = ({children}) => {
             set_mercadopago_redirect,
             set_mercadopago_transparent_offline,
             set_UALA_PROD,
+            set_wibond_redirect,
             set_custom_payment_wire_transfer_production,
             set_custom_payment_cash_production,
             set_custom_payment_other_production,
