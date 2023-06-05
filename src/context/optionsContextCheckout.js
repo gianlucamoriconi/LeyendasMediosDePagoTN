@@ -106,7 +106,7 @@ export const OptionsCheckout = ({children}) => {
         {
             id: "wibond_redirect",
             paymentName: "Wibond",
-            img: "https://repositorio-tiendanube.s3.us-east-2.amazonaws.com/logo-wibond-124x28.png",
+            img: ["https://repositorio-tiendanube.s3.us-east-2.amazonaws.com/logo-wibond-124x28.png"],
             dataContext: payments.wibond_redirect,
             setValuePayment: set_UALA_PROD, //REVISAR
         },
